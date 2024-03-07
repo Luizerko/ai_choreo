@@ -1,0 +1,3 @@
+# AI-Generated Choreography - from Solos to Duets
+
+This is a repository focused on the development of the project [AI-Generated Choreography - from Solos to Duets](https://humanai.foundation/gsoc/2024/proposal_ChoreoAI1.html). For now, it only contains the `evaluation_test` folder, since I'm still aplying for the contributor position. In there, you can find a `README` with all the information regarding the implementations for the provided test and also the results obtained. You can also find the notebook with the source code for everything I developed. I hope you have a good time going through the test folder and I also hope to get the opportunity to expand this `README`.
