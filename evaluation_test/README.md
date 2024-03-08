@@ -14,7 +14,7 @@ Note: I did not include the experimentation parts to this section of the noteboo
 
 <p align="center">
   <figure>
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence" width="400">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence">
     <figcaption>Visualizing a sequence from the original dataset.</figcaption>
   </figure>
 </p>
@@ -57,17 +57,18 @@ Finally, one behavior I did not manage to fix was the initial state of the joint
 
 In the GIFs below I show some of the obtained results.
 
-<p align="center">
-  <figure>
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/original_seq.gif" alt="Original Sequence" width="400">
-    <figcaption>Orignal sequence.</figcaption>
-  </figure>
-  <figure>
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/recon_seq.gif" alt="Reconstructed Sequence" width="400">
-    <figcaption>Reconstructed sequence.</figcaption>
-  </figure>
-</p>
-
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/original_seq.gif" alt="Original Sequence" width="400" /><br>
+      <figcaption align="center">Orignal sequence.</figcaption>
+    </td>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/recon_seq.gif" alt="Reconstructed Sequence" width="400"/><br>
+      <figcaption align="center">Reconstructed sequence.</figcaption>
+    </td>
+  </tr>
+</table>
 
 
 ## Why This Project?
