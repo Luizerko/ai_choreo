@@ -16,7 +16,7 @@ After creating the conda environment, just install all the dependencies by runni
 pip install -r requirements.txt
 ```
 
-Alternatively, if the dependencie versions don't match your system (very likely because of the CUDA version), you can manually install all the core packages found in `requirements.in`. They should also require you to install compatible versions of all the packages contained in `requirements.txt`.
+Alternatively, if the dependency versions don't match your system (very likely because of the CUDA version), you can manually install all the core packages found in `requirements.in`. They should also require you to install compatible versions of all the packages contained in `requirements.txt`.
 
 ## Loading Data
 
