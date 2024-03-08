@@ -16,6 +16,8 @@ After creating the conda environment, just install all the dependencies by runni
 pip install -r requirements.txt
 ```
 
+Alternatively, if the dependencie versions don't match your system (very likely because of the CUDA version), you can manually install all the core packages found in `requirements.in`. They should also require you to install compatible versions of all the packages contained in `requirements.txt`.
+
 ## Loading Data
 
 This is the pre-test part of the project that consists of replicating [Mariel's code](https://github.com/mariel-pettee/choreo-graph/blob/main/functions/load_data.py) to properly load and preprocess the [provided data](https://github.com/mariel-pettee/choreo-graph/tree/main/data). In here you can find code to load data, put everything in a very handable data structure and format, preprocess the joint positions so that they belong to the same unit cube (since we are interested in relative motion instead of absolute motion), and finally compute the edges.
@@ -67,7 +69,6 @@ Furthermore, I had issues with the validation loss that made me replicate the ex
 
   <figure align="center">
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/loss_graphs.png" alt="Loss Curves" width="600">
-    <figcaption align="center">Loss curves for training dataset (blue on the left) and validation dataset (red on the right).</figcaption>
   </figure>
 
 <br>
