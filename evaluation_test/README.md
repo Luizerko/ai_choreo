@@ -2,6 +2,20 @@
 
 This is a file containing all the information regarding the development of the evaluation test.
 
+## Setup
+
+Before using the notebook, you should setup your environment:
+
+```
+conda create -n <NAME_OF_YOUR_ENVIRONMENT> python=3.10
+```
+
+After creating the conda environment, just install all the dependencies by running:
+
+```
+pip install -r requirements.txt
+```
+
 ## Loading Data
 
 This is the pre-test part of the project that consists of replicating [Mariel's code](https://github.com/mariel-pettee/choreo-graph/blob/main/functions/load_data.py) to properly load and preprocess the [provided data](https://github.com/mariel-pettee/choreo-graph/tree/main/data). In here you can find code to load data, put everything in a very handable data structure and format, preprocess the joint positions so that they belong to the same unit cube (since we are interested in relative motion instead of absolute motion), and finally compute the edges.
@@ -43,9 +57,14 @@ I expanded the dataset using data noise augmentation. I got around 10000 random 
 
 ### Comments and Results
 
-Even though I had reduced a lot the hyperparamter space by trying to replicate the provided paper, I still ended up having to train the model multiple times to find out the best hyperparameters. I also tried modifying the number of LSTM layers in the model (from 3 in the original paper to 1 or 2) to make it more slightly more adequate to the amount of data I had, but ended up with not so good results.
+Even though I had reduced a lot the hyperparamter space by trying to replicate the provided paper, I still ended up having to train the model multiple times to find out the best hyperparameters.
 
-Furthermore, I had issues with the validation loss that made me replicate the experiments an enormous amount of times. I had a decreasing validation loss, as expected, but still orders of magnitude larger than the training loss. I think this problem is mostly related to the model being a bit to complex for the amount of data I had ($\frac{2}{3}$ of the data size from the paper with much less augmentation due to GPU limitations). I tried reducing the amount of LSTM layers even further to make the model simpler, but found out it was not really capable of capturing the complexity of dance sequences, mostly generating sequences in which the figure stands almost still.
+Furthermore, I had issues with the validation loss that made me replicate the experiments an enormous amount of times. I had a decreasing validation loss, as expected, but still orders of magnitude larger than the training loss. I think this problem is mostly related to the model being a bit to complex for the amount of data I had ($\frac{2}{3}$ of the data size from the paper with much less augmentation due to GPU limitations). I tried reducing the amount of LSTM layers to make the model simpler, but found out it was not really capable of capturing the complexity of dance sequences, mostly generating sequences in which the figure stands almost still. The image below shows the loss curves for training and validation datasets throughout the training process:
+
+  <figure align="center">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/loss_graphs.png" alt="Loss Curves" width="400">
+    <figcaption align="center">Loss curves for training dataset (blue on the left) and validation dataset (red on the right).</figcaption>
+  </figure>
 
 A better solution I could think of was to reduce the sequence length drastically (64 instead of 128) to both expand the dataset and make the sequences much more simple to learn. It indeed reduced the validation loss quite a lot, but generated very bad sequences (almost random joint positions and movement). In the end I did not have the time to properly evaluate all the hyperparameters possibilities for this reduced sequence model and went back to the original sequence lengths implementation that had much better results at least.
 
@@ -56,6 +75,8 @@ When it comes to generating new sequences, the model is quite sensitive to the s
 Finally, one behavior I did not manage to fix was the initial state of the joints. Even in the best reconstructed/generated sequences, the joints start in weird positions, making the first miliseconds of the animation almost glitch to proper positions and then start a proper sequence of movements.
 
 In the GIFs below I show some of the obtained results.
+
+<br>
 
 <table>
   <tr>
@@ -70,6 +91,8 @@ In the GIFs below I show some of the obtained results.
   </tr>
 </table>
 
+<br>
+
 <table>
   <tr>
     <td>
@@ -82,6 +105,8 @@ In the GIFs below I show some of the obtained results.
     </td>
   </tr>
 </table>
+
+<br>
 
 <table>
   <tr>
@@ -96,6 +121,8 @@ In the GIFs below I show some of the obtained results.
   </tr>
 </table>
 
+<br>
+
 <table>
   <tr>
     <td>
@@ -109,11 +136,13 @@ In the GIFs below I show some of the obtained results.
   </tr>
 </table>
 
+<br>
+
 <table>
   <tr>
     <td>
       <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq_shaky.gif" alt="Shaky Generated Sequence" width="400" /><br>
-      <figcaption align="center">Generated sequence with larger standard deviation ($1.5\sigma^2$).</figcaption>
+      <figcaption align="center">Generated sequence with a bit larger standard deviation ($1.5\sigma^2$).</figcaption>
     </td>
     <td>
       <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq_2std.gif" alt="2 Standard Deviation Generated Sequence" width="400"/><br>
