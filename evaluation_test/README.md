@@ -12,6 +12,13 @@ This is the first part of the test, in which I effectively started developing. I
 
 Note: I did not include the experimentation parts to this section of the notebook because I didn't want to make it even longer.
 
+<p align="center">
+  <figure>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence" width="400">
+    <figcaption>Visualizing a sequence from the original dataset.</figcaption>
+  </figure>
+</p>
+
 ## Training Generative Model
 
 This is the second part of the test and the most difficult one. To make all the descriptions more clear, I separate them into different sections:
@@ -26,9 +33,9 @@ This is the second part of the test and the most difficult one. To make all the 
 
 ### Architecture and Optimization
 
-- One encoder with 2 LSTM layers (384 nodes) and 2 separated branches of linear layers (256 nodes each for the latent space), one for the mean and another one for log-variance.
+- One encoder with 3 LSTM layers (384 nodes) and 2 separated branches of linear layers (256 nodes each for the latent space), one for the mean and another one for log-variance.
 
-- One decoder with 1 linear layer (384 nodes) with ReLU activation function for the latent-space sampled data and 2 LSTM layers (159 nodes for the output).
+- One decoder with 1 linear layer (384 nodes) with ReLU activation function for the latent-space sampled data and 3 LSTM layers (159 nodes for the output).
 
 The model was trained with Adam optimizer for 200 epochs with early stopping at 3 validation losses higher than the best validation loss at that point. I also used the KL-divergence weight provided in the paper (0.0001). Finally, I added 0.2 dropout for the LSTM layers for some more regularization.
 
@@ -36,7 +43,7 @@ I expanded the dataset using data noise augmentation. I got around 10000 random 
 
 ### Comments and Results
 
-Even though I had reduced a lot the hyperparamter space by trying to replicate the provided paper, I still ended up having to train the model multiple times to find out the best hyperparameters. Not only that, but also I had to modify the number of LSTM layers in the model (from 3 in the original paper to 2) to make it more slightly more adequate to the amount of data/time I had without completly losing the fundamental temporal structure of the model.
+Even though I had reduced a lot the hyperparamter space by trying to replicate the provided paper, I still ended up having to train the model multiple times to find out the best hyperparameters. I also tried modifying the number of LSTM layers in the model (from 3 in the original paper to 1 or 2) to make it more slightly more adequate to the amount of data I had, but ended up with not so good results.
 
 Furthermore, I had issues with the validation loss that made me replicate the experiments an enormous amount of times. I had a decreasing validation loss, as expected, but still orders of magnitude larger than the training loss. I think this problem is mostly related to the model being a bit to complex for the amount of data I had ($\frac{2}{3}$ of the data size from the paper with much less augmentation due to GPU limitations). I tried reducing the amount of LSTM layers even further to make the model simpler, but found out it was not really capable of capturing the complexity of dance sequences, mostly generating sequences in which the figure stands almost still.
 
@@ -48,7 +55,20 @@ When it comes to generating new sequences, the model is quite sensitive to the s
 
 Finally, one behavior I did not manage to fix was the initial state of the joints. Even in the best reconstructed/generated sequences, the joints start in weird positions, making the first miliseconds of the animation almost glitch to proper positions and then start a proper sequence of movements.
 
-In the GIFs below I show some of the good and bad results obtained.
+In the GIFs below I show some of the obtained results.
+
+<p align="center">
+  <figure>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/original_seq.gif" alt="Original Sequence" width="400">
+    <figcaption>Orignal sequence.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/recon_seq.gif" alt="Reconstructed Sequence" width="400">
+    <figcaption>Reconstructed sequence.</figcaption>
+  </figure>
+</p>
+
+
 
 ## Why This Project?
 
