@@ -26,6 +26,8 @@ This is the first part of the test, in which I effectively started developing. I
 
 Note: I did not include the experimentation parts to this section of the notebook because I didn't want to make it even longer.
 
+<br>
+
 <p align="center">
   <figure>
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence" width="400">
@@ -61,10 +63,14 @@ Even though I had reduced a lot the hyperparamter space by trying to replicate t
 
 Furthermore, I had issues with the validation loss that made me replicate the experiments an enormous amount of times. I had a decreasing validation loss, as expected, but still orders of magnitude larger than the training loss. I think this problem is mostly related to the model being a bit to complex for the amount of data I had ($\frac{2}{3}$ of the data size from the paper with much less augmentation due to GPU limitations). I tried reducing the amount of LSTM layers to make the model simpler, but found out it was not really capable of capturing the complexity of dance sequences, mostly generating sequences in which the figure stands almost still. The image below shows the loss curves for training and validation datasets throughout the training process:
 
+<br>
+
   <figure align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/loss_graphs.png" alt="Loss Curves" width="400">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/loss_graphs.png" alt="Loss Curves" width="600">
     <figcaption align="center">Loss curves for training dataset (blue on the left) and validation dataset (red on the right).</figcaption>
   </figure>
+
+<br>
 
 A better solution I could think of was to reduce the sequence length drastically (64 instead of 128) to both expand the dataset and make the sequences much more simple to learn. It indeed reduced the validation loss quite a lot, but generated very bad sequences (almost random joint positions and movement). In the end I did not have the time to properly evaluate all the hyperparameters possibilities for this reduced sequence model and went back to the original sequence lengths implementation that had much better results at least.
 
@@ -92,6 +98,7 @@ In the GIFs below I show some of the obtained results.
 </table>
 
 <br>
+<br>
 
 <table>
   <tr>
@@ -106,6 +113,7 @@ In the GIFs below I show some of the obtained results.
   </tr>
 </table>
 
+<br>
 <br>
 
 <table>
@@ -122,6 +130,7 @@ In the GIFs below I show some of the obtained results.
 </table>
 
 <br>
+<br>
 
 <table>
   <tr>
@@ -136,6 +145,7 @@ In the GIFs below I show some of the obtained results.
   </tr>
 </table>
 
+<br>
 <br>
 
 <table>
