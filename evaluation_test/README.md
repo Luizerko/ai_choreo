@@ -14,8 +14,8 @@ Note: I did not include the experimentation parts to this section of the noteboo
 
 <p align="center">
   <figure>
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence">
-    <figcaption>Visualizing a sequence from the original dataset.</figcaption>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/visualizing_sequence.gif" alt="Visualizing an Original Sequence" width="400">
+    <figcaption align="center">Visualizing a sequence from the original dataset.</figcaption>
   </figure>
 </p>
 
@@ -66,6 +66,58 @@ In the GIFs below I show some of the obtained results.
     <td>
       <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/recon_seq.gif" alt="Reconstructed Sequence" width="400"/><br>
       <figcaption align="center">Reconstructed sequence.</figcaption>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/bad_original_seq.gif" alt="Bad Original Sequence" width="400" /><br>
+      <figcaption align="center">Original sequence that doesn't reconstruct well.</figcaption>
+    </td>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/bad_recon_seq.gif" alt="Bad Reconstructed Sequence" width="400"/><br>
+      <figcaption align="center">Not so good reconstructed sequence. The core movements are captured by the reconstruction though.</figcaption>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq.gif" alt="Generated Sequence" width="400" /><br>
+      <figcaption align="center">Generated sequence.</figcaption>
+    </td>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq_me.gif" alt="Interpretation of Generated Sequence" width="400"/><br>
+      <figcaption align="center">My interpretation of the generated sequence.</figcaption>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq2.gif" alt="Another Generated Sequence" width="400" /><br>
+      <figcaption align="center">Another generated sequence.</figcaption>
+    </td>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq2_me.gif" alt="Interpretation of Another Generated Sequence" width="400"/><br>
+      <figcaption align="center">My interpretation of another generated sequence.</figcaption>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq_shaky.gif" alt="Shaky Generated Sequence" width="400" /><br>
+      <figcaption align="center">Generated sequence with larger standard deviation ($1.5\sigma^2$).</figcaption>
+    </td>
+    <td>
+      <img src="https://github.com/Luizerko/ai_choreo/blob/master/evaluation_test/assets/generated_seq_2std.gif" alt="2 Standard Deviation Generated Sequence" width="400"/><br>
+      <figcaption align="center">Generated sequence with even larger standard deviation ($2\sigma^2$).</figcaption>
     </td>
   </tr>
 </table>
