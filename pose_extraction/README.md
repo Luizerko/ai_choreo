@@ -12,12 +12,16 @@ We tested all the models within [AlphaPose model zoo](https://github.com/MVIG-SJ
 
 <br>
 
-<center>
-  <figure style="text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/model_coverage.png" alt="Visualizing pose extractions coming from different models from AlphaPose." width="800">
-    <figcaption>Visualizing pose extractions coming from different models from AlphaPose. From left to right, the models are: Fast Pose (DCN) from the MSCOCO dataset, Fast Pose (DCN) Combined Loss from the COCO WholeBody dataset, Fast Pose from the Halpe dataset with 26 keypoints, and Fast Pose (DCN) Combined 10 Hand Weight Loss from the Halpe dataset with 136 keypoints.</figcaption>
-  </figure>
-</center>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/model_coverage.png" alt="Visualizing pose extractions coming from different models from AlphaPose." width="800" /><br>
+        <span>Visualizing pose extractions coming from different models from AlphaPose. From left to right, the models are: Fast Pose (DCN) from the MSCOCO dataset, Fast Pose (DCN) Combined Loss from the COCO WholeBody dataset, Fast Pose from the Halpe dataset with 26 keypoints, and Fast Pose (DCN) Combined 10 Hand Weight Loss from the Halpe dataset with 136 keypoints.</span>
+      </td>
+    </tr>
+  </table>
+</div>
 
 <br>
 
