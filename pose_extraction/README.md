@@ -91,15 +91,19 @@ With this in mind, we explored two main 3D pose extraction models: [VIBE](https:
 <br>
 
 <div align="center">
-  <figcaption style="margin-bottom: 10px; font-weight: bold;">HybrIk 3D pose extraction.</figcaption>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_joints.gif" alt="Joints for HybrIk 3D pose extraction" width="400">
-    <figcaption>Joints from 3D pose extraction coming from HybrIk.</figcaption>
-  </figure>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_video.gif" alt="Mesh for HybrIk 3D pose extraction" width="400">
-    <figcaption>Mesh reconstruction from 3D pose extraction coming from HybrIk.</figcaption>
-  </figure>
+  <p><strong>HybrIk 3D pose extraction.</strong></p>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_joints.gif" alt="Joints for HybrIk 3D pose extraction" width="400" /><br>
+        <span>Joints from 3D pose extraction coming from HybrIk.</span>
+      </td>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_video.gif" alt="Mesh for HybrIk 3D pose extraction" width="400"/><br>
+        <span>Mesh reconstruction from 3D pose extraction coming from HybrIk.</span>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
