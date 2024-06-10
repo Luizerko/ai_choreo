@@ -12,12 +12,12 @@ We tested all the models within [AlphaPose model zoo](https://github.com/MVIG-SJ
 
 <br>
 
-<p align="center">
-  <figure style="display: inline-block; text-align: center;">
+<center>
+  <figure style="text-align: center;">
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/model_coverage.png" alt="Visualizing pose extractions coming from different models from AlphaPose." width="800">
-    <figcaption align="center">Visualizing pose extractions coming from different models from AlphaPose. From left to right, the models are: Fast Pose (DCN) from the MSCOCO dataset, Fast Pose (DCN) Combined Loss from the COCO WholeBody dataset, Fast Pose from the Halpe dataset with 26 keypoints, and Fast Pose (DCN) Combined 10 Hand Weight Loss from the Halpe dataset with 136 keypoints.</figcaption>
+    <figcaption>Visualizing pose extractions coming from different models from AlphaPose. From left to right, the models are: Fast Pose (DCN) from the MSCOCO dataset, Fast Pose (DCN) Combined Loss from the COCO WholeBody dataset, Fast Pose from the Halpe dataset with 26 keypoints, and Fast Pose (DCN) Combined 10 Hand Weight Loss from the Halpe dataset with 136 keypoints.</figcaption>
   </figure>
-</p>
+</center>
 
 <br>
 
@@ -26,14 +26,18 @@ To more accurately represent the body, having clear markers for the pelvis and t
 <br>
 
 <div align="center">
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/2d_halpe26_joints.gif" alt="Visualizing Halpe 26 keypoints poses" width="400">
-    <figcaption>Visualizing poses extracted using the model trained on Halpe dataset with 26 keypoints.</figcaption>
-  </figure>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/2d_halpe136_joints.gif" alt="Visualizing Halpe 136 keypoints poses" width="400">
-    <figcaption>Visualizing poses extracted using the model trained on Halpe dataset with 136 keypoints.</figcaption>
-  </figure>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/2d_halpe26_joints.gif" alt="Visualizing Halpe 26 keypoints poses" width="400" /><br>
+        <span>Visualizing poses extracted using the model trained on Halpe dataset with 26 keypoints.</span>
+      </td>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/2d_halpe136_joints.gif" alt="Visualizing Halpe 136 keypoints poses" width="400"/><br>
+        <span>Visualizing poses extracted using the model trained on Halpe dataset with 136 keypoints.</span>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
@@ -43,29 +47,37 @@ However, it is clear that both models require further processing for final use. 
 <br>
 
 <div align="center">
-  <figcaption style="margin-bottom: 10px; font-weight: bold;">Studying tracking improvements for Halpe 26 keypoints.</figcaption>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_no_tracking.gif" alt="Visualizing Halpe 26 no tracking" width="400">
-    <figcaption>Model with no tracking.</figcaption>
-  </figure>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_tracking.gif" alt="Visualizing Halpe 26 with tracking" width="400">
-    <figcaption>Model with tracking.</figcaption>
-  </figure>
+  <p><strong>Studying tracking improvements for Halpe 26 keypoints.</strong></p>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_no_tracking.gif" alt="Visualizing Halpe 26 no tracking" width="400" /><br>
+        <span>Model with no tracking.</span>
+      </td>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_tracking.gif" alt="Visualizing Halpe 26 with tracking" width="400"/><br>
+        <span>Model with tracking.</span>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
 
 <div align="center">
-  <figcaption style="margin-bottom: 10px; font-weight: bold;">Studying tracking improvements for Halpe 136 keypoints.</figcaption>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_no_tracking.gif" alt="Visualizing Halpe 136 no tracking" width="400">
-    <figcaption>Model with no tracking.</figcaption>
-  </figure>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_tracking.gif" alt="Visualizing Halpe 136 with tracking" width="400">
-    <figcaption>Model with tracking.</figcaption>
-  </figure>
+  <p><strong>Studying tracking improvements for Halpe 136 keypoints.</strong></p>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_no_tracking.gif" alt="Visualizing Halpe 136 no tracking" width="400" /><br>
+        <span>Model with no tracking.</span>
+      </td>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/halpe_26_tracking.gif" alt="Visualizing Halpe 136 with tracking" width="400"/><br>
+        <span>Model with tracking.</span>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
@@ -77,15 +89,19 @@ With this in mind, we explored two main 3D pose extraction models: [VIBE](https:
 <br>
 
 <div align="center">
-  <figcaption style="margin-bottom: 10px; font-weight: bold;">VIBE 3D pose extraction.</figcaption>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_joints.gif" alt="Joints for VIBE 3D pose extraction" width="400">
-    <figcaption>Joints from 3D pose extraction coming from VIBE.</figcaption>
-  </figure>
-  <figure style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_video.gif" alt="Mesh for VIBE 3D pose extraction" width="600">
-    <figcaption>Mesh reconstruction from 3D pose extraction coming from VIBE.</figcaption>
-  </figure>
+  <p><strong>VIBE 3D pose extraction.</strong></p>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_joints.gif" alt="Joints for VIBE 3D pose extraction" width="400" /><br>
+        <span>Joints from 3D pose extraction coming from VIBE.</span>
+      </td>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_video.gif" alt="Mesh for VIBE 3D pose extraction" width="600"/><br>
+        <span>Mesh reconstruction from 3D pose extraction coming from VIBE.</span>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
