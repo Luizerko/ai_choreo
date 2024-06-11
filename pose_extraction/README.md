@@ -101,7 +101,7 @@ With this in mind, we explored two main 3D pose extraction models: [VIBE](https:
         <span>Joints from 3D pose extraction coming from VIBE.</span>
       </td>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_video.gif" alt="Mesh for VIBE 3D pose extraction" width="600"/><br>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_vibe_video.gif" alt="Mesh for VIBE 3D pose extraction" width="500"/><br>
         <span>Mesh reconstruction from 3D pose extraction coming from VIBE.</span>
       </td>
     </tr>
@@ -119,7 +119,7 @@ With this in mind, we explored two main 3D pose extraction models: [VIBE](https:
         <span>Joints from 3D pose extraction coming from HybrIk.</span>
       </td>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_video.gif" alt="Mesh for HybrIk 3D pose extraction" width="400"/><br>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/3d_hybrik_video.gif" alt="Mesh for HybrIk 3D pose extraction" width="500"/><br>
         <span>Mesh reconstruction from 3D pose extraction coming from HybrIk.</span>
       </td>
     </tr>
@@ -133,3 +133,7 @@ It became clear to us, including from the GIFs above, that the model integrated 
 Therefore, the rest of this document will focus on using AlphaPose for 3D pose extraction. We will provide a step-by-step guide for installation and setup. The examples shown will better represent the actual scenario, as AlphaPose supports multi-instance pose extraction, allowing us to extract poses for two dancers simultaneously. This is an improvement over HybrIK, which only handles single-person pose extraction, but was used in this section for easier visualization and pose extraction capabilities assessment.
 
 ## Set Up
+
+Refer to the [installation document](https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/INSTALL.md) to set up your own version of the project.
+
+## Extracting Poses
