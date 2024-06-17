@@ -146,7 +146,7 @@ Once the pipeline is chosen, the next important step is processing the data. Sel
   <table>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/mesh_video.png" alt="Visualizing mesh coming directly from AlphaPose." width="800" /><br>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/mesh_video.gif" alt="Visualizing mesh coming directly from AlphaPose." width="800" /><br>
         <span>Visualizing mesh reconstruction coming directly from AlphaPose, with no preprocessing.</span>
       </td>
     </tr>
@@ -176,19 +176,19 @@ In the grid below, you can see the original video, the motion extraction without
   <table>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/0210-0220.gif" alt="Visualizing original video." width="600" /><br>
-        <span>Visualizing original video.</span>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/no_processing.gif" alt="Visualizing pose extraction with no processing" width="600" /><br>
         <span>Visualizing pose extraction with no processing.</span>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/processing.gif" alt="Visualizing pose extraction with processing" width="400" /><br>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/0210-0220.gif" alt="Visualizing original video." width="600" /><br>
+        <span>Visualizing original video.</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/processing.gif" alt="Visualizing pose extraction with processing" width="600" /><br>
         <span>Visualizing pose extraction with processing.</span>
       </td>
     </tr>
