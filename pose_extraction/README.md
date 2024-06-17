@@ -146,7 +146,7 @@ Once the pipeline is chosen, the next important step is processing the data. Sel
   <table>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/mesh_video.gif" alt="Visualizing mesh coming directly from AlphaPose." width="800" /><br>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/mesh_video.gif" alt="Visualizing mesh coming directly from AlphaPose." width="600" /><br>
         <span>Visualizing mesh reconstruction coming directly from AlphaPose, with no preprocessing.</span>
       </td>
     </tr>

@@ -7,7 +7,7 @@ Special thanks to my supervisors, [Mariel Pettee](https://marielpettee.com/) and
 ## Duet ChorAIgraphy
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/assets/duet_chraigraphy_logo.png", width="450">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/assets/duet_choraigraphy_logo.png", width="450">
 </div>
 
 ## Repository Hierarchy
