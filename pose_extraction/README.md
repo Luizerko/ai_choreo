@@ -137,3 +137,62 @@ Therefore, the rest of this document will focus on using AlphaPose for 3D pose e
 Refer to the [installation document](https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/INSTALL.md) to set up your own version of the project.
 
 ## Extracting Poses
+
+Once the pipeline is chosen, the next important step is processing the data. Selecting a method doesn't mean the data is already clean and ready to use. The GIF below shows some common issues, and this section explains how we resolved them to get to the final the data that will be used as input to our models.
+
+<br>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/mesh_video.png" alt="Visualizing mesh coming directly from AlphaPose." width="800" /><br>
+        <span>Visualizing mesh reconstruction coming directly from AlphaPose, with no preprocessing.</span>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br>
+
+The problems addressed were:
+
+1. **Missing frames:** When a frame was lost because no pose was identified, we replicated the poses from the previous frame. This solution worked well due to the small number of missed frames and the high sampling rate (approximately 30 FPS), which prevented noticeable impacts on movement.
+
+2. **Frames with only one person:** When the model captured only one person in a frame, we compared the sum of Euclidean distances between corresponding joints for the identified person and the two people in the previous frame. We then added the person from the previous frame with the greater distance to the current frame (assuming this was the non-captured person).
+
+3. **Frames with more than two people:** When the model identified more than two people in a frame, we retained the two people with the highest confidence scores and removed the rest, as we know in advance that our data only contains two people per frame.
+
+4. **Index matching:** When the model lost track of people, swapping their indices back and forth over time, we scanned all frames and used the aforementioned sum of Euclidean distances between corresponding joints to correct the inversions.
+
+5. **Vertex jitter:** When the model caused local inaccuracies that varied the positions of vertices beyond the actual movement, making a jitter effect, we tested a few different methods and ended up using a 3D DCT low-pass filter (25% threshold) to smooth the data.
+
+In the grid below, you can see the original video, the motion extraction without processing, and the final result after applying our pipeline.
+
+<br>
+
+<div align="center">
+  <p><strong>HybrIk 3D pose extraction.</strong></p>
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/0210-0220.gif" alt="Visualizing original video." width="600" /><br>
+        <span>Visualizing original video.</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/no_processing.gif" alt="Visualizing pose extraction with no processing" width="600" /><br>
+        <span>Visualizing pose extraction with no processing.</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/processing.gif" alt="Visualizing pose extraction with processing" width="400" /><br>
+        <span>Visualizing pose extraction with processing.</span>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br>
