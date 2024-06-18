@@ -172,7 +172,7 @@ In the grid below, you can see the original video, the motion extraction without
 <br>
 
 <div align="center">
-  <p><strong>HybrIk 3D pose extraction.</strong></p>
+  <p><strong>Pose extraction pipeline evaluation.</strong></p>
   <table>
     <tr>
       <td align="center">
@@ -196,3 +196,4 @@ In the grid below, you can see the original video, the motion extraction without
 </div>
 
 <br>
+
