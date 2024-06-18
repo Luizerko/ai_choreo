@@ -176,8 +176,8 @@ In the grid below, you can see the original video, the motion extraction without
   <table>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/no_processing.gif" alt="Visualizing pose extraction with no processing" width="600" /><br>
-        <span>Visualizing pose extraction with no processing.</span>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/no_processing.gif" alt="Visualizing pose extraction with minimum processing" width="600" /><br>
+        <span>Visualizing pose extraction with minimum processing (missing frames and missing/additional people).</span>
       </td>
     </tr>
     <tr>
@@ -188,8 +188,8 @@ In the grid below, you can see the original video, the motion extraction without
     </tr>
     <tr>
       <td align="center">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/processing.gif" alt="Visualizing pose extraction with processing" width="600" /><br>
-        <span>Visualizing pose extraction with processing.</span>
+        <img src="https://github.com/Luizerko/ai_choreo/blob/master/pose_extraction/assets/processing.gif" alt="Visualizing pose extraction with full processing pipeline" width="600" /><br>
+        <span>Visualizing pose extraction with full processing pipeline.</span>
       </td>
     </tr>
   </table>
