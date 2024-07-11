@@ -197,3 +197,10 @@ In the grid below, you can see the original video, the motion extraction without
 
 <br>
 
+## Footnotes
+
+It is worth noting that for the final pipeline, two minor adjustments were made that were not previously mentioned:
+
+1. By default, AlphaPose outputs data with 24 joints per person, but it also computes an output with 29 joints. We adjusted a few lines of the original pipeline to output the 29 joints data instead of 24, providing a slightly richer representation.
+
+2. Additionally, AlphaPose normalizes the position of its instances by centering the bodies at the coordinate (0, 0, 0) in the global frame. While this is generally beneficial, our project aims to study the interaction between the dancers' bodies. Therefore, we removed a normalization line within `Simple3DPoseBaseSMPLCam.forward()` to ensure the dancers' positions are accurately preserved.
