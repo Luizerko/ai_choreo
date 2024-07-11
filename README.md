@@ -4,17 +4,16 @@ This repository is dedicated to the development of the project [AI-Generated Cho
 
 Special thanks to my supervisors, [Mariel Pettee](https://marielpettee.com/) and [Ilya Vidrin](https://www.ilyavidrin.com/), for all their guidance, and to my work partner, Zixuan Wang, for developing [her pipeline](https://github.com/wang-zixuan/AI-Choreo-Duets/tree/main) alongside mine.
 
-## Duet ChorAIgraphy
+## Duet ChorAIgraphy: Using GNNs to Study Duets
 
 <div align="center">
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/assets/duet_choraigraphy_logo.png", width="450">
 </div>
 
-### Duet ChorAIgraphy: Implementing Pipelines Using GNNs to Study Duet Dances
-
 Duet ChorAIgraphy aims to implement two pipelines using Graph Neural Networks (GNNs) to study dance duets. The project focuses on two main aspects: 
 
 1. **Interpretability of Movements:** A pipeline that learns about the connection between the dancers' bodies in different dance sequences.
+
 2. **Generation of New Sequences:** A pipeline that uses these learned connections to generate new dance sequences.
 
 Below, I discuss each of these pipelines in more detail and present some results. For a more comprehensive explanation of the models, I encourage you to check the `models` directory, which contains their implementations as well as more complete documentation on both.
