@@ -35,7 +35,7 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='
         if mode == 'train':
             optimizer.zero_grad()
         
-        batch = train_batches[idx*batch_size:(idx+1)*batch_size]
+        batch = batches[idx*batch_size:(idx+1)*batch_size]
         batch = batch.to(device)
         logits, recon_output = model(batch)
 
@@ -244,4 +244,4 @@ if args.visual:
     fig.text(0.02, 0.30, 'Validation', va='center', rotation='vertical', fontsize=14)
 
     plt.tight_layout(rect=[0.05, 0.05, 1, 0.95])
-    plt.show()
+    plt.savefig('loss_graphs.png')

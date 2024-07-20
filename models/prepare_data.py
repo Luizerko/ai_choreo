@@ -38,17 +38,25 @@ def load_data(seq_len):
     for edge_index in range(full_skeleton_len):
         edge_index_t.append([edge_index_t[edge_index][1], edge_index_t[edge_index][0]])
 
-    # Building sequences
     batches = []
     choreo_lens = []
+
+    # Building non-overlapping sequences
+    # for choreo in joint_poses:
+    #     choreo = torch.Tensor(choreo)
+
+    #     num_seqs = choreo.shape[0] // seq_len
+    #     batches.append(torch.stack([choreo[i*seq_len:(i+1)*seq_len] for i in range(num_seqs)]))
+    #     choreo_lens.append(batches[-1].size(0))
+
+    # Building overlapping sequences
     for choreo in joint_poses:
         choreo = torch.Tensor(choreo)
 
-        num_seqs = choreo.shape[0] // seq_len
-        batches.append(torch.stack([choreo[i*seq_len:(i+1)*seq_len] for i in range(num_seqs)]))
+        batches.append(torch.stack([choreo[i:i+seq_len] for i in range(len(choreo)-seq_len)]))
         choreo_lens.append(batches[-1].size(0))
 
-    batches = torch.cat(batches, dim=0)
+        batches = torch.cat(batches, dim=0)
 
     # Balanced training-validation split
     train_split = []
