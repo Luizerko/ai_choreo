@@ -12,7 +12,7 @@ from modules import *
 from utils import *
 
 # Model iteration function
-def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='train', \
+def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, beta, mode='train', \
                     recon_mode='nll', save_path='best_weights/nri_parameters.pt'):
     t = time.time()
     
@@ -36,7 +36,6 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='
             optimizer.zero_grad()
         
         batch = batches[idx*batch_size:(idx+1)*batch_size]
-        batch = batch.to(device)
         logits, recon_output = model(batch)
 
         kl_loss = gumbel_softmax_kl_divergence(logits, log_prior, batch_size)
@@ -45,8 +44,8 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='
 
         if recon_mode == 'nll':
             nll_gaussian = nll_gaussian_loss()
-            recon_loss = nll_gaussian(recon_output, batches[(idx+1)*batch_size:(idx+2)*batch_size, :seq_len_out, :, :], \
-                                    torch.full(recon_output.shape, out_var, device=device))    
+            var_tensor = torch.full(recon_output.shape, out_var, device=device)
+            recon_loss = nll_gaussian(recon_output, batches[(idx+1)*batch_size:(idx+2)*batch_size, :seq_len_out, :, :], var_tensor)    
         elif recon_mode == 'mse':
             mse = mse_loss()
             recon_loss = mse(recon_output, batches[(idx+1)*batch_size:(idx+2)*batch_size, :seq_len_out, :, :])
@@ -58,15 +57,15 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='
         elif recon_mode == 'mse':
             recon_coef = 1
             
-        loss = 0.01*kl_loss + recon_coef*recon_loss
-        # loss = recon_coef*recon_loss
+        # loss = beta*0.01*kl_loss + recon_coef*recon_loss
+        loss = recon_coef*recon_loss
 
         if mode == 'train':
             loss.backward()
             optimizer.step()
 
-        kl_aux.append(0.01*kl_loss)
-        recon_aux.append(recon_coef*recon_loss)    
+        kl_aux.append(0.01*kl_loss.item())
+        recon_aux.append(recon_coef*recon_loss.item())    
         loss_aux.append(loss.data.item())
 
     kl_aux = torch.Tensor(kl_aux)
@@ -92,6 +91,9 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, mode='
             torch.save(model.state_dict(), save_path)
             tqdm.write(f'Epoch: {epoch + 1:04d}, Saving best parameters!')
 
+    del var_tensor
+    torch.cuda.empty_cache()
+
     return kl_aux, recon_aux, loss_aux
 
 # Parsing arguments to choose general options and hyperparameter values
@@ -99,7 +101,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default=42, help='Random seed.')
 
-parser.add_argument('--batch-size', type=int, default=8, help='Number of samples per batch.')
+parser.add_argument('--batch-size', type=int, default=64, help='Number of samples per batch.')
 
 parser.add_argument('--seq-len-in', type=int, default=32, help='Number of input time steps per sample.')
 parser.add_argument('--seq-len-out', type=int, default=4, help='Number of steps to predict.')
@@ -114,12 +116,12 @@ parser.add_argument('--var', type=float, default=5e-5, help='Output variance use
 
 parser.add_argument('--prior', action='store_false', default=True, help='Whether to use sparsity prior.')
 
-parser.add_argument('--epochs', type=int, default=500, help='Number of epochs to train.')
+parser.add_argument('--epochs', type=int, default=300, help='Number of epochs to train.')
 parser.add_argument('--lr', type=float, default=0.0005, help='Initial learning rate.')
-parser.add_argument('--lr-decay', type=int, default=50, help='After how many epochs to decay LR by a factor of gamma.')
+parser.add_argument('--lr-decay', type=int, default=20, help='After how many epochs to decay LR by a factor of gamma.')
 parser.add_argument('--gamma', type=float, default=0.5, help='LR decay factor.')
 
-parser.add_argument('--loss-mode', type=float, default='nll', help='Type of reconstruction loss to used')
+parser.add_argument('--loss-mode', type=str, default='nll', help='Type of reconstruction loss to used')
 parser.add_argument('--save-path', type=str, default='best_weights/nri_parameters.pt', help='Where to save the trained model.')
 parser.add_argument('--load-path', type=str, default='best_weights/nri_parameters.pt', help='Where to load the trained model from.')
 
@@ -196,14 +198,18 @@ best_epoch = 0
 
 # Training loop
 for epoch in tqdm(range(epochs), desc='Training Epochs'):
+    # Beta coefficient to handle KL-Divergence vanishing gradients and balance reconstruction loss
+    beta = epoch % int(epochs*0.2) / (epochs*0.2)
     
-    kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, train_batches, train_batches_cumsum, 'train', loss_mode)
+    kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, train_batches, \
+                                                  train_batches_cumsum, beta, 'train', loss_mode)
     
     kl_train.append(torch.mean(kl_aux))
     recon_train.append(torch.mean(recon_aux))
     loss_train.append(torch.mean(loss_aux))
 
-    kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, val_batches, val_batches_cumsum, 'val', loss_mode, save_path)
+    kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, val_batches, \
+                                                  val_batches_cumsum, beta, 'val', loss_mode, save_path)
     
     kl_val.append(torch.mean(kl_aux))
     recon_val.append(torch.mean(recon_aux))

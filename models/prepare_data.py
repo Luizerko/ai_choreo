@@ -4,6 +4,8 @@ import numpy as np
 import torch
 
 def load_data(seq_len):
+    print('######## Array Information Coming From Original Videos ########')
+
     # Reading data coming from the pre-processing pipeline and creating both dancers
     joint_poses = []
     for file in glob('./data/*.npy'):
@@ -13,6 +15,8 @@ def load_data(seq_len):
         
         joint_poses.append(np.concatenate((poses_1, poses_2), axis=1))
         print('Joint poses {} shape: {}\n'.format(file.split('/')[-1], joint_poses[-1].shape))
+
+    print('\n')
 
     # Building initial transposed edge index (adjacencies)
     edge_index_t = [[0, 1], [0, 2], [0, 3], [1, 4], [2, 5], [3, 6], [4, 7], [5, 8], [6, 9], [7, 10], [7, 27], [8, 11],
@@ -38,6 +42,8 @@ def load_data(seq_len):
     for edge_index in range(full_skeleton_len):
         edge_index_t.append([edge_index_t[edge_index][1], edge_index_t[edge_index][0]])
 
+    print(f'######## Total Number of Edges: {len(edge_index_t)} ########\n')
+
     batches = []
     choreo_lens = []
 
@@ -56,7 +62,7 @@ def load_data(seq_len):
         batches.append(torch.stack([choreo[i:i+seq_len] for i in range(len(choreo)-seq_len)]))
         choreo_lens.append(batches[-1].size(0))
 
-        batches = torch.cat(batches, dim=0)
+    batches = torch.cat(batches, dim=0)
 
     # Balanced training-validation split
     train_split = []
@@ -76,6 +82,8 @@ def load_data(seq_len):
 
     train_batches = torch.cat(train_batches, dim=0)
     val_batches = torch.cat(val_batches, dim=0)
+
+    print('######## Data Structures Created For Training ########')
 
     # Printing all the data structures created
     print('Shape of tensor with all sequences: {}'.format(batches.shape))
