@@ -16,8 +16,6 @@ def load_data(seq_len):
         joint_poses.append(np.concatenate((poses_1, poses_2), axis=1))
         print('Joint poses {} shape: {}\n'.format(file.split('/')[-1], joint_poses[-1].shape))
 
-    print('\n')
-
     # Building initial transposed edge index (adjacencies)
     edge_index_t = [[0, 1], [0, 2], [0, 3], [1, 4], [2, 5], [3, 6], [4, 7], [5, 8], [6, 9], [7, 10], [7, 27], [8, 11],
                     [8, 28], [9, 12], [9, 13], [9, 14], [12, 15], [13, 16], [14, 17], [15, 24], [16, 18], [17, 19],

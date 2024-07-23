@@ -101,7 +101,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--seed', type=int, default=42, help='Random seed.')
 
-parser.add_argument('--batch-size', type=int, default=64, help='Number of samples per batch.')
+parser.add_argument('--batch-size', type=int, default=128, help='Number of samples per batch.')
 
 parser.add_argument('--seq-len-in', type=int, default=32, help='Number of input time steps per sample.')
 parser.add_argument('--seq-len-out', type=int, default=4, help='Number of steps to predict.')
@@ -127,7 +127,7 @@ parser.add_argument('--load-path', type=str, default='best_weights/nri_parameter
 
 parser.add_argument('--param-count', action='store_true', default=False, help='Wheter to count the number of trainable parameters in the model.')
 
-parser.add_argument('--visual', action='store_true', default=False, help='Wheter to visualize training graphs.')
+parser.add_argument('--visual', action='store_false', default=True, help='Wheter to visualize training graphs.')
 
 args = parser.parse_args()
 
@@ -175,7 +175,7 @@ model = nri_vae(device, n_joints, edge_index_t, seq_len_in*dims, hidden_dim, edg
 
 if args.param_count:
     # Counting number of trainable parameters to compare to the dataset size
-    print('Total number of trainable parameters: {}\n'.format(sum(p.numel() for p in model.parameters() if p.requires_grad)))
+    print('######## Total number of trainable parameters: {} ########\n'.format(sum(p.numel() for p in model.parameters() if p.requires_grad)))
 
     for n, p in model.named_parameters():
         if p.requires_grad:
