@@ -14,9 +14,10 @@ Refer to the [installation document](https://github.com/Luizerko/ai_choreo/blob/
 
 The next step in the project involves loading the dance data for AI modeling. First, the preprocessed data is read in an interleaved manner to separately extract data from both dancers. Adjacencies are then created by initializing a default skeleton with 29 joints for each dancer and connecting every joint of one dancer to all joints of the other.
 
-<div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/skeleton_and_connections.png", width="250">
+<div align="center" style='display: flex; flex-direction: column; flex-wrap: wrap;'>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/skeleton_and_connections.png", width="450">
     <span>Plot of the two dancers with only their skeletons (left) and fully connected to their partner (right).</span>
+    <br>
 </div>
 
 The idea behind mapping the skeletons of both dancers in this way is to ensure the model focuses on the connections between them, rather than on the connections within each individual dancer. It's natural that much of a dancer's joint movement could be more easily predicted by inspecting their other joints. However, the goal here is to focus on the influences between the dancers, identifying which joints of one dancer influence the other and vice versa. It is also worth noting that, to simplify the initial modeling, this graph is undirected. This approach will be adjusted in the future to evaluate the direction of the influences between each joint of both dancers.
@@ -33,9 +34,10 @@ Since a target graph structure correctly identifying which joints are virtually 
 
 The model consists of an encoder and a decoder, both playing around with transforming node representations into edge representations and vice versa. This approach emphasizes the dynamics of movements rather than fixed node embeddings. Not only that, but the encoder specifically outputs edges, sampling these from the generated latent space, making it essential to switch between representations.
 
-<div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="350">
+<div align="center" style='display: flex; flex-direction: column; flex-wrap: wrap;'>
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="550">
     <span>Image adapted from the <a href='https://arxiv.org/abs/1802.04687'>original NRI paper</a> showing a schematic overview of the final model architecture, including the GCN nodes and the sequence-to-sequence adapatation.</span>
+    <br>
 </div>
 
 This project's implementation, even though very similar to the NRI MLP-Encoder MLP-Decoder model, includes a few important modifications:
