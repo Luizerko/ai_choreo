@@ -118,8 +118,8 @@ parser.add_argument('--prior', action='store_false', default=True, help='Whether
 
 parser.add_argument('--epochs', type=int, default=300, help='Number of epochs to train.')
 parser.add_argument('--lr', type=float, default=0.0005, help='Initial learning rate.')
-parser.add_argument('--lr-decay', type=int, default=20, help='After how many epochs to decay LR by a factor of gamma.')
-parser.add_argument('--gamma', type=float, default=0.5, help='LR decay factor.')
+parser.add_argument('--lr-cycle', type=int, default=10, help='After how many epochs to vary LR in the cycle.')
+# parser.add_argument('--gamma', type=float, default=0.5, help='LR decay factor.')
 
 parser.add_argument('--loss-mode', type=str, default='nll', help='Type of reconstruction loss to used')
 parser.add_argument('--save-path', type=str, default='best_weights/nri_parameters.pt', help='Where to save the trained model.')
@@ -158,13 +158,13 @@ dropout = args.dropout
 out_var = args.var
 
 if args.prior:
-    prior = [0.9, 0.1]
+    prior = [0.95, 0.05]
     log_prior = torch.FloatTensor(np.log(prior)).unsqueeze(0).unsqueeze(0).to(device)
 
 epochs = args.epochs
 lr = args.lr
-lr_decay = args.lr_decay
-gamma = args.gamma
+lr_cycle = args.lr_cycle
+# gamma = args.gamma
 
 loss_mode = args.loss_mode
 save_path = args.save_path
@@ -182,7 +182,7 @@ if args.param_count:
             print('Layer {} has {} trainbale parameters'.format(n, p.numel()))
 
 optimizer = optim.Adam(model.parameters(), lr=lr)
-scheduler = lr_scheduler.StepLR(optimizer, step_size=lr_decay, gamma=gamma)
+scheduler = lr_scheduler.CyclicLR(optimizer, base_lr=lr/5, max_lr=lr, step_size_up=lr_cycle, mode='triangular', cycle_momentum=False)
 
 # Initializing lists to save losses across iterations
 kl_train = []
@@ -250,4 +250,4 @@ if args.visual:
     fig.text(0.02, 0.30, 'Validation', va='center', rotation='vertical', fontsize=14)
 
     plt.tight_layout(rect=[0.05, 0.05, 1, 0.95])
-    plt.savefig('loss_graphs.png')
+    plt.savefig('assets/loss_graphs.png')
