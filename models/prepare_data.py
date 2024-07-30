@@ -3,6 +3,38 @@ from glob import glob
 import numpy as np
 import torch
 
+# Defining rotation functions
+def rotation_matrix_x(angle):
+    c, s = np.cos(angle), np.sin(angle)
+    
+    return np.array([[1, 0, 0],
+                     [0, c, -s],
+                     [0, s, c]])
+
+def rotation_matrix_y(angle):
+    c, s = np.cos(angle), np.sin(angle)
+    
+    return np.array([[c, 0, s],
+                     [0, 1, 0],
+                     [-s, 0, c]])
+
+def rotation_matrix_z(angle):
+    c, s = np.cos(angle), np.sin(angle)
+    
+    return np.array([[c, -s, 0],
+                     [s, c, 0],
+                     [0, 0, 1]])
+
+def rotate_points(points, angle_x, angle_y, angle_z):
+    Rx = rotation_matrix_x(angle_x)
+    Ry = rotation_matrix_y(angle_y)
+    Rz = rotation_matrix_z(angle_z)
+    
+    rotation_matrix = Rz @ Ry @ Rx
+    rotated_points = points @ rotation_matrix.T
+    
+    return rotated_points
+
 def load_data(seq_len):
     print('######## Array Information Coming From Original Videos ########')
 
@@ -42,25 +74,52 @@ def load_data(seq_len):
 
     print(f'######## Total Number of Edges: {len(edge_index_t)} ########\n')
 
+    # Augmenting poses by adding random rotations
+    rand_rot_num = 4
+    joint_poses_augmented = [joint_poses]
+    for r in range(rand_rot_num):
+        joint_poses_rot = []
+        
+        angle_x = 2*np.random.rand(1)[0]*np.pi
+        angle_y = 2*np.random.rand(1)[0]*np.pi
+        angle_z = 2*np.random.rand(1)[0]*np.pi
+        
+        for choreo in joint_poses:
+            choreo_aux = []
+            
+            for frame in choreo:
+                rotated_points = rotate_points(frame, angle_x, angle_y, angle_z)    
+                choreo_aux.append(rotated_points)
+                
+            joint_poses_rot.append(np.array(choreo_aux))
+
+        joint_poses_augmented.append(joint_poses_rot)
+
     batches = []
     choreo_lens = []
 
     # Building non-overlapping sequences
-    # for choreo in joint_poses:
-    #     choreo = torch.Tensor(choreo)
-
-    #     num_seqs = choreo.shape[0] // seq_len
-    #     batches.append(torch.stack([choreo[i*seq_len:(i+1)*seq_len] for i in range(num_seqs)]))
-    #     choreo_lens.append(batches[-1].size(0))
+    # for joint_poses_rot in joint_poses_augmented:
+    #     for choreo in joint_poses_rot:
+    #         choreo = torch.Tensor(choreo)
+        
+    #         num_seqs = choreo.shape[0] // seq_len
+    #         batches.append(torch.stack([choreo[i*seq_len:(i+1)*seq_len] for i in range(num_seqs)]))
+    #         choreo_lens.append(batches[-1].size(0))
 
     # Building overlapping sequences
-    for choreo in joint_poses:
-        choreo = torch.Tensor(choreo)
-
-        batches.append(torch.stack([choreo[i:i+seq_len] for i in range(len(choreo)-seq_len)]))
-        choreo_lens.append(batches[-1].size(0))
+    for joint_poses_rot in joint_poses_augmented:
+        for choreo in joint_poses_rot:
+            choreo = torch.Tensor(choreo)
+        
+            batches.append(torch.stack([choreo[i:i+seq_len] for i in range(len(choreo)-seq_len)]))
+            choreo_lens.append(batches[-1].size(0))
 
     batches = torch.cat(batches, dim=0)
+
+    # Fixing x, y, z configuration
+    batches = batches[:, :, :, [2, 0, 1]]
+    batches[:, :, :, 2] = -batches[:, :, :, 2]
 
     # Balanced training-validation split
     train_split = []

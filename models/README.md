@@ -15,7 +15,7 @@ Refer to the [installation document](https://github.com/Luizerko/ai_choreo/blob/
 The next step in the project involves loading the dance data for AI modeling. First, the preprocessed data is read in an interleaved manner to separately extract data from both dancers. Adjacencies are then created by initializing a default skeleton with 29 joints for each dancer and connecting every joint of one dancer to all joints of the other.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/skeleton_and_connections.png", width="450">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/skeleton_and_connections.png", width="550">
 </div>
 <div align='center'>
     <span>Plot of the two dancers with only their skeletons (left) and fully connected to their partner (right).</span>
@@ -37,7 +37,7 @@ Since a target graph structure correctly identifying which joints are virtually 
 The model consists of an encoder and a decoder, both playing around with transforming node representations into edge representations and vice versa. This approach emphasizes the dynamics of movements rather than fixed node embeddings. Not only that, but the encoder specifically outputs edges, sampling these from the generated latent space, making it essential to switch between representations.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="550">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="650">
 </div>
 <div align="center">
     <span>Image adapted from the <a href='https://arxiv.org/abs/1802.04687'>original NRI paper</a> showing a schematic overview of the final model architecture, including the GCN nodes and the sequence-to-sequence adapatation.</span>

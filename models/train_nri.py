@@ -57,8 +57,8 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, beta, 
         elif recon_mode == 'mse':
             recon_coef = 1
             
-        # loss = beta*0.01*kl_loss + recon_coef*recon_loss
-        loss = recon_coef*recon_loss
+        loss = beta*0.01*kl_loss + recon_coef*recon_loss
+        # loss = recon_coef*recon_loss
 
         if mode == 'train':
             loss.backward()
@@ -91,7 +91,8 @@ def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, beta, 
             torch.save(model.state_dict(), save_path)
             tqdm.write(f'Epoch: {epoch + 1:04d}, Saving best parameters!')
 
-    del var_tensor
+    if recon_mode == 'nll':
+        del var_tensor
     torch.cuda.empty_cache()
 
     return kl_aux, recon_aux, loss_aux
@@ -182,7 +183,9 @@ if args.param_count:
             print('Layer {} has {} trainbale parameters'.format(n, p.numel()))
 
 optimizer = optim.Adam(model.parameters(), lr=lr)
+#scheduler = lr_scheduler.StepLR(optimizer, step_size=args.lr_cycle, gamma=args.gamma)
 scheduler = lr_scheduler.CyclicLR(optimizer, base_lr=lr/5, max_lr=lr, step_size_up=lr_cycle, mode='triangular', cycle_momentum=False)
+
 
 # Initializing lists to save losses across iterations
 kl_train = []
