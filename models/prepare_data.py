@@ -35,6 +35,21 @@ def rotate_points(points, angle_x, angle_y, angle_z):
     
     return rotated_points
 
+# Defining velocity function
+def compute_velocities(data, frame_gap=5):
+    velocities = data[frame_gap:] - data[:-frame_gap]
+
+    # Repeating velocity for final frames
+    padding = velocities[-1, :, :].repeat(frame_gap, 1, 1)
+
+    velocities = torch.cat((velocities, padding), dim=0)
+    
+    # Fixing velocity configuration
+    velocities = velocities[:, :, [2, 0, 1]]
+    velocities[:, :, 2] = -velocities[:, :, 2]
+    
+    return velocities
+
 def load_data(seq_len):
     print('######## Array Information Coming From Original Videos ########')
 
@@ -95,12 +110,31 @@ def load_data(seq_len):
 
         joint_poses_augmented.append(joint_poses_rot)
 
+    # Estimating velocity of points
+    frame_gap = 5
+    velocities = []
+    joint_poses_augmented_velo = []
+    for joint_poses_rot in joint_poses_augmented:
+        velocities_aux = []
+        joint_poses_velo_aux = []
+        
+        for choreo in joint_poses_rot:
+            choreo = torch.Tensor(choreo)
+        
+            velocity_choreo = compute_velocities(choreo, frame_gap)
+            velocities_aux.append(velocity_choreo)
+            
+            joint_poses_velo_aux.append(torch.cat((choreo, velocity_choreo), dim=-1))
+
+        velocities.append(velocities_aux)
+        joint_poses_augmented_velo.append(joint_poses_velo_aux)
+
     batches = []
     choreo_lens = []
 
     # Building non-overlapping sequences
-    # for joint_poses_rot in joint_poses_augmented:
-    #     for choreo in joint_poses_rot:
+    # for joint_poses_rot_velo in joint_poses_augmented_velo:
+    #     for choreo in joint_poses_rot_velo:
     #         choreo = torch.Tensor(choreo)
         
     #         num_seqs = choreo.shape[0] // seq_len
@@ -108,8 +142,8 @@ def load_data(seq_len):
     #         choreo_lens.append(batches[-1].size(0))
 
     # Building overlapping sequences
-    for joint_poses_rot in joint_poses_augmented:
-        for choreo in joint_poses_rot:
+    for joint_poses_rot_velo in joint_poses_augmented_velo:
+        for choreo in joint_poses_rot_velo:
             choreo = torch.Tensor(choreo)
         
             batches.append(torch.stack([choreo[i:i+seq_len] for i in range(len(choreo)-seq_len)]))

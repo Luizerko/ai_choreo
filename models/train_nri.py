@@ -159,7 +159,7 @@ dropout = args.dropout
 out_var = args.var
 
 if args.prior:
-    prior = [0.95, 0.05]
+    prior = [0.8, 0.2]
     log_prior = torch.FloatTensor(np.log(prior)).unsqueeze(0).unsqueeze(0).to(device)
 
 epochs = args.epochs
