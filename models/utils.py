@@ -50,9 +50,10 @@ def message_passing_matrices(n_joints, edge_index):
     message_passing_in = torch.zeros((edge_index.size(1), n_joints))
     message_passing_out = torch.zeros((edge_index.size(1), n_joints))
 
-    for j in range(edge_index.size(1)):
-        message_passing_out[j, int(edge_index[0, j])] = 1.
-        message_passing_in[j, int(edge_index[1, j])] = 1.
+    # Vectorizing message_passing matrices creation
+    edge_indices = torch.arange(edge_index.size(1))
+    message_passing_out[edge_indices, edge_index[0]] = 1.
+    message_passing_in[edge_indices, edge_index[1]] = 1.
 
     return message_passing_in, message_passing_out
 
@@ -89,9 +90,9 @@ def gumbel_softmax_kl_divergence(logits, log_prior, batch_size):
 
 
 # Gaussian NLL loss
-def nll_gaussian_loss():
-    return nn.GaussianNLLLoss(reduction='sum')
+def nll_gaussian_loss(reduction='mean'):
+    return nn.GaussianNLLLoss(reduction=reduction)
 
 # MSE loss
-def mse_loss():
-    return nn.MSELoss(reduction='sum')
+def mse_loss(reduction='mean'):
+    return nn.MSELoss(reduction=reduction)
