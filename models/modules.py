@@ -125,7 +125,7 @@ class nri_encoder(nn.Module):
 
 # NRI recurrent encoder
 class nri_rec_encoder(nn.Module):
-    def __init__(self, device, n_joints, edge_index_t, n_in, n_hid, n_out, do_prob=0.):
+    def __init__(self, device, n_joints, edge_index_t, n_in, n_hid, n_out):
         super(nri_rec_encoder, self).__init__()
         self.device = device
 
@@ -292,7 +292,7 @@ class nri_vae(nn.Module):
 
         # Initializing encoder and decoder
         if rec_enc:
-            self.encoder = nri_rec_encoder(device, n_joints, edge_index_t, n_dims, n_hid, edge_types, do_prob)
+            self.encoder = nri_rec_encoder(device, n_joints, edge_index_t, n_dims, n_hid, edge_types)
         else:
             self.encoder = nri_encoder(device, n_joints, edge_index_t, n_in, n_hid, edge_types, do_prob, compact_enc)
 

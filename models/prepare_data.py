@@ -3,52 +3,8 @@ from glob import glob
 import numpy as np
 import torch
 
-# Defining rotation functions
-def rotation_matrix_x(angle):
-    c, s = np.cos(angle), np.sin(angle)
-    
-    return np.array([[1, 0, 0],
-                     [0, c, -s],
-                     [0, s, c]])
+from utils import *
 
-def rotation_matrix_y(angle):
-    c, s = np.cos(angle), np.sin(angle)
-    
-    return np.array([[c, 0, s],
-                     [0, 1, 0],
-                     [-s, 0, c]])
-
-def rotation_matrix_z(angle):
-    c, s = np.cos(angle), np.sin(angle)
-    
-    return np.array([[c, -s, 0],
-                     [s, c, 0],
-                     [0, 0, 1]])
-
-def rotate_points(points, angle_x, angle_y, angle_z):
-    Rx = rotation_matrix_x(angle_x)
-    Ry = rotation_matrix_y(angle_y)
-    Rz = rotation_matrix_z(angle_z)
-    
-    rotation_matrix = Rz @ Ry @ Rx
-    rotated_points = points @ rotation_matrix.T
-    
-    return rotated_points
-
-# Defining velocity function
-def compute_velocities(data, frame_gap=2):
-    velocities = data[frame_gap:] - data[:-frame_gap]
-
-    # Repeating velocity for final frames
-    padding = velocities[-1, :, :].repeat(frame_gap, 1, 1)
-
-    velocities = torch.cat((velocities, padding), dim=0)
-    
-    # Fixing velocity configuration
-    velocities = velocities[:, :, [2, 0, 1]]
-    velocities[:, :, 2] = -velocities[:, :, 2]
-    
-    return velocities
 
 def load_data(seq_len, n_sample_dancers=None):
     print('######## Array Information Coming From Original Videos ########')
@@ -61,7 +17,7 @@ def load_data(seq_len, n_sample_dancers=None):
         poses_2 = interleaved_poses[1::2]
         
         # Sampling frames for movement smoothness
-        joint_poses.append(np.concatenate((poses_1, poses_2), axis=1)[::5])
+        joint_poses.append(np.concatenate((poses_1, poses_2), axis=1)[::3])
         print('Joint poses {} shape: {}\n'.format(file.split('/')[-1], joint_poses[-1].shape))
 
     # Building initial transposed edge index (adjacencies)
@@ -111,6 +67,7 @@ def load_data(seq_len, n_sample_dancers=None):
     #         joint_poses_rot.append(np.array(choreo_aux))
 
     #     joint_poses_augmented.append(joint_poses_rot)
+
 
     # Estimating velocity of points
     frame_gap = 1
