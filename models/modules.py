@@ -315,7 +315,7 @@ class nri_vae(nn.Module):
         logits = self.encoder(x)
 
         # Sampling edge index classes using Gumbel-Softmax
-        y = gumbel_softmax_sample(logits, tau, hard)
+        y = gumbel_softmax_sample(logits, self.tau, self.hard)
 
         # Getting sampled edges for every element in the batch
         edge_index_dict = {i: [] for i in range(logits.size(0))}

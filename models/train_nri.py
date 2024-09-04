@@ -12,8 +12,8 @@ from modules import *
 from utils import *
 
 # Model iteration function
-def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, beta, dataset_multiplier, mode='train', \
-                    recon_mode='nll', save_path='best_weights/nri_parameters.pt'):
+def model_iteration(model, optimizer, scheduler, batches, batches_cumsum, beta, frame_gap, dataset_multiplier, \
+                    mode='train', recon_mode='nll', save_path='best_weights/nri_parameters.pt'):
     t = time.time()
     
     kl_aux = []
@@ -126,10 +126,9 @@ parser = argparse.ArgumentParser()
 
 # parser.add_argument('--batch-size', type=int, default=128, help='Number of samples per batch.')
 
-parser.add_argument('--n-sample-dancers', type=int, default=3, help='Number of input time steps per sample.')
-parser.add_argument('--dataset-multiplier', type=int, default=10, help='Number of input time steps per sample.')
-
-args.compact_encoder, args.recurrent_encoder, args.recurrent_decoder
+parser.add_argument('--n-sample-dancers', type=int, default=3, help='Number of joints to sample for dancers.')
+parser.add_argument('--frame-gap', type=int, default=1, help='Number of frames to skip for velocity computation.')
+parser.add_argument('--dataset-multiplier', type=int, default=5, help='Number of times to augment the dataset with rotations.')
 
 parser.add_argument('--compact-encoder', action='store_true', default=False, help='Whether to use the compact version of the encoder.')
 parser.add_argument('--recurrent-encoder', action='store_true', default=False, help='Whether to use the recurrent encoder.')
@@ -165,6 +164,7 @@ args = parser.parse_args()
 
 # Acquiring data
 joint_poses, edge_index_t, batches, choreo_lens, train_batches, train_split, val_batches, val_split = load_data(args.seq_len_in, \
+                                                                                                                args.frame_gap, \
                                                                                                                 args.n_sample_dancers)
 
 # Initializing all the hyperparameters and moving the required ones to device
@@ -210,7 +210,7 @@ loss_mode = args.loss_mode
 save_path = args.save_path
 load_path = args.load_path
 
-model = nri_vae(device, n_joints, edge_index_t, seq_len_in*dims, hidden_dims, edge_types, seq_len_out*int(dims/2), \
+model = nri_vae(device, n_joints, edge_index_t, seq_len_in*dims, hidden_dim, edge_types, seq_len_out*int(dims/2), \
                 tau, hard, dropout, dims, args.compact_encoder, args.recurrent_encoder, args.recurrent_decoder)
 
 optimizer = optim.Adam(model.parameters(), lr=lr)
@@ -243,14 +243,16 @@ for epoch in tqdm(range(epochs), desc='Training Epochs'):
     beta = epoch % int(epochs*0.2) / (epochs*0.2)
     
     kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, train_batches, \
-                                                  train_batches_cumsum, beta, args.dataset_multiplier, 'train', loss_mode)
+                                                  train_batches_cumsum, beta, args.frame_gap, args.dataset_multiplier, \
+                                                  'train', loss_mode)
     
     kl_train.append(torch.mean(kl_aux))
     recon_train.append(torch.mean(recon_aux))
     loss_train.append(torch.mean(loss_aux))
 
     kl_aux, recon_aux, loss_aux = model_iteration(model, optimizer, scheduler, val_batches, \
-                                                  val_batches_cumsum, beta, args.dataset_multiplier, 'val', loss_mode, save_path)
+                                                  val_batches_cumsum, beta, args.frame_gap, args.dataset_multiplier, \
+                                                  'val', loss_mode, save_path)
     
     kl_val.append(torch.mean(kl_aux))
     recon_val.append(torch.mean(recon_aux))

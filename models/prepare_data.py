@@ -6,7 +6,7 @@ import torch
 from utils import *
 
 
-def load_data(seq_len, n_sample_dancers=None):
+def load_data(seq_len, frame_gap=1, n_sample_dancers=None):
     print('######## Array Information Coming From Original Videos ########')
 
     # Reading data coming from the pre-processing pipeline and creating both dancers
@@ -70,7 +70,6 @@ def load_data(seq_len, n_sample_dancers=None):
 
 
     # Estimating velocity of points
-    frame_gap = 1
     velocities = []
     joint_poses_velo = []
     for joint_pose in [joint_poses]:
@@ -86,7 +85,7 @@ def load_data(seq_len, n_sample_dancers=None):
             joint_poses_velo_aux.append(torch.cat((choreo, velocity_choreo), dim=-1))
 
         velocities.append(velocities_aux)
-        joint_poses_augmented_velo.append(joint_poses_velo_aux)
+        joint_poses_velo.append(joint_poses_velo_aux)
 
     batches = []
     choreo_lens = []
@@ -134,24 +133,15 @@ def load_data(seq_len, n_sample_dancers=None):
     train_batches = torch.cat(train_batches, dim=0)
     val_batches = torch.cat(val_batches, dim=0)
 
-    print('######## Data Structures Created For Training ########')
-
-    # Printing all the data structures created
-    print('Shape of tensor with all sequences: {}'.format(batches.shape))
-    print('Length of each choreography: {}\n'.format(choreo_lens))
-
-    print('Shape of training data with all sequences: {}'.format(train_batches.shape))
-    print('Length of each choreography in training dataset: {}\n'.format(train_split))
-
-    print('Shape of validation data with all sequences: {}'.format(val_batches.shape))
-    print('Length of each choreography in validation dataset: {}\n'.format(val_split))
-
     # Sampling joints and selecting edges connected to these joints if duet simplification requested
     if n_sample_dancers is not None:
         sampled_joints_1 = np.random.choice(n_joints, n_sample_dancers)
         sampled_joints_2 = np.random.choice(n_joints, n_sample_dancers) + n_joints
         sampled_joints = np.concatenate([sampled_joints_1, sampled_joints_2])
-        print("Sampled joints for dancer 1: {}, and dancer 2: {}".format(sampled_joints_1, sampled_joints_2))
+        print("Sampled joints for dancer 1: {}, and dancer 2: {}\n".format(sampled_joints_1, sampled_joints_2))
+
+        # Mapping sampled joints to new indices for the message passing matrices
+        edge_mapping = {e: c for c, e in zip(range(len(sampled_joints)), sampled_joints)}        
 
         sampled_batches = batches[:, :, sampled_joints, :]
         sampled_train_batches = train_batches[:, :, sampled_joints, :]
@@ -162,8 +152,34 @@ def load_data(seq_len, n_sample_dancers=None):
             if (start not in sampled_joints) or (end not in sampled_joints):
                 continue
 
-            sampled_edge_index_t.append([start, end])
+            sampled_edge_index_t.append([edge_mapping[start], edge_mapping[end]])
+
+        print(f'######## Total Number of Sampled Edges: {len(sampled_edge_index_t)} ########\n')
+
+        print('######## Data Structures Created For Training ########\n')
+
+        # Printing all the data structures created
+        print('Shape of tensor with all sequences: {}'.format(sampled_batches.shape))
+        print('Length of each choreography: {}\n'.format(choreo_lens))
+
+        print('Shape of training data with all sequences: {}'.format(sampled_train_batches.shape))
+        print('Length of each choreography in training dataset: {}\n'.format(train_split))
+
+        print('Shape of validation data with all sequences: {}'.format(sampled_val_batches.shape))
+        print('Length of each choreography in validation dataset: {}\n'.format(val_split))
 
         return joint_poses, sampled_edge_index_t, sampled_batches, choreo_lens, sampled_train_batches, train_split, sampled_val_batches, val_split
+
+    print('######## Data Structures Created For Training ########\n')
+
+    # Printing all the data structures created
+    print('Shape of tensor with all sequences: {}'.format(batches.shape))
+    print('Length of each choreography: {}\n'.format(choreo_lens))
+
+    print('Shape of training data with all sequences: {}'.format(train_batches.shape))
+    print('Length of each choreography in training dataset: {}\n'.format(train_split))
+
+    print('Shape of validation data with all sequences: {}'.format(val_batches.shape))
+    print('Length of each choreography in validation dataset: {}\n'.format(val_split))
 
     return joint_poses, edge_index_t, batches, choreo_lens, train_batches, train_split, val_batches, val_split
