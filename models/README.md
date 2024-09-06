@@ -50,7 +50,9 @@ This project's implementation, even though very similar to the NRI MLP-Encoder M
 
 - **Graph Convolutional Network (GCN):** Some MLP layers are replaced with GCN layers to leverage the graph structure, improving the model's ability to capture relationships between joints. This change focuses on a subset of edges connecting both dancers rather than studying all particle relationships as in the original implementation. Additionally, GCNs provide local feature aggregation and parameter sharing, important inductive biases for this context, resulting in enhanced generalization in a scenario with dynamic (and unknown) graph structures.
 
-- **GCN LSTM cells:** To utilize the recurrent structure crucial for sequence processing while maintaining graph information and GNN architecture, the classic LSTM cell has been reimplemented with GCN nodes. Currently only the decoder incorporates the recurrent component, which generates a final sequence embedding that the model uses to reconstruct the next frame.
+- **GCN LSTM Cells:** To utilize the recurrent structure crucial for sequence processing while maintaining graph information and GNN architecture, the classic LSTM cell has been reimplemented with GCN nodes. Currently only the decoder incorporates the recurrent component, which generates a final sequence embedding that the model uses to reconstruct the next frame.
+
+- **Recurrent Decoder:** 
 
 By incorporating these modifications, the model maintains the core principles of the original NRI model while theoretically enhancing its ability to generalize and adapt to the dynamic nature of dance performances.
 
