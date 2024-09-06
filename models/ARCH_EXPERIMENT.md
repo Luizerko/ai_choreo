@@ -13,7 +13,7 @@ These findings have shifted the focus to refining the architecture and adjusting
 The data generation process involved using the `data/generate_dataset.py` script with the default settings from the [original project repository](https://github.com/ethanfetaya/NRI), but with the option to simulate charged particles in motion. This resulted in a training dataset of 50000 simulations, each simulation including 5 particles with 2D coordinates and 2D velocities, moving over 49 frames. The interactions between charges are defined by a random undirected graph, which controls the particles' accelerations, affecting their speed and position in each frame.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/trajectories_and_graph.png", width="600">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/trajectories_and_graph.png", width="500">
 </div>
 <div align='center'>
     <span>On the left, you can see a complete simulation, where the paths of different particles are shown in various colors, starting their trajectories with lighter shades and ending with darker ones. On the right, you see the interaction graph between the particles, where the edges between vertices indicate bidirectional interactions between the respective particles.</span>
@@ -39,7 +39,7 @@ Using samples from the data described above, different architectures were tested
 This effect is evident in some experimental results shown below. Usually, when a particle has no sampled interactions, it stays still in the center. Also, particle movement is naturally linked to the particles they interact with, so good edge sampling is crucial for accurate reconstructions.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/mov_part_edges.png", width="500">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/mov_part_edges.png", width="350">
 </div>
 <div align='center'>
     <span>The image illustrates the reconstruction of a 6-frame sequence, where only the particles connected by an edge are in motion. This edge sample and reconstruction come from a trained compact architecture model.</span>
@@ -48,7 +48,7 @@ This effect is evident in some experimental results shown below. Usually, when a
 
 For the following experiments, these were the original trajectories and graph considered:
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_graph.png" width="300">
     </div>
@@ -78,7 +78,7 @@ For this architecture, four models were trained, and their example reconstructio
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq.png" width="350">
     </div>
@@ -93,7 +93,7 @@ For this architecture, four models were trained, and their example reconstructio
 
 2. **Model with 6-frame sequences, but with more edge types (4 instead of binary)**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq_4edges.png" width="350">
     </div>
@@ -108,7 +108,7 @@ For this architecture, four models were trained, and their example reconstructio
 
 3. **Model with 12-frame sequences**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq.png" width="350">
     </div>
@@ -123,7 +123,7 @@ For this architecture, four models were trained, and their example reconstructio
 
 4. **Model with 12-frame sequences with recurrent encoder**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq_recurrent.png" width="350">
     </div>
@@ -142,7 +142,7 @@ This is the originally implemented architecture, without any modifications to th
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_6seq.png" width="350">
     </div>
@@ -157,7 +157,7 @@ This is the originally implemented architecture, without any modifications to th
 
 2. **Model with 12-frame sequences**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_12seq.png" width="350">
     </div>
@@ -176,7 +176,7 @@ Similar to the previous architecture, this one is the same as the original, with
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; justify-content: center;">
+<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_big_6seq.png" width="350">
     </div>
@@ -192,7 +192,7 @@ Similar to the previous architecture, this one is the same as the original, with
 2. **Model with 12-frame sequences**
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_big_12seq.png", width="500">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_big_12seq.png", width="400">
 </div>
 <div align='center'>
     <span>The image shows the reconstruction generated by this model, which demonstrates decent particle localization but fails to provide coherent movement predictions. This issue becomes more pronounced with longer sequences.</span>
