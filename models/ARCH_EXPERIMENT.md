@@ -13,19 +13,19 @@ These findings have shifted the focus to refining the architecture and adjusting
 The data generation process involved using the `data/generate_dataset.py` script with the default settings from the [original project repository](https://github.com/ethanfetaya/NRI), but with the option to simulate charged particles in motion. This resulted in a training dataset of 50000 simulations, each simulation including 5 particles with 2D coordinates and 2D velocities, moving over 49 frames. The interactions between charges are defined by a random undirected graph, which controls the particles' accelerations, affecting their speed and position in each frame.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/trajectories_and_graph.png", width="500">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/trajectories_and_graph.png", width="600">
 </div>
 <div align='center'>
     <span>On the left, you can see a complete simulation, where the paths of different particles are shown in various colors, starting their trajectories with lighter shades and ending with darker ones. On the right, you see the interaction graph between the particles, where the edges between vertices indicate bidirectional interactions between the respective particles.</span>
     <br><br>
 </div>
 
-To prepare the model input, the original sequence of 49 frames is first reduced to 48 frames to simplify testing different sequence splits. Subdivisions are then tested using sub-trajectories of 8, 12, 16, or 24 frames. To ensure the training process remains within a reasonable time frame (under 24 hours), non-overlapping sequences are used, meaning each simulation is divided into non-overlapping segments of $\frac{48}/{sequence_size}$. The next section provides additional visualizations and detailed information on the performance of the models tested for each sequence size.
+To prepare the model input, the original sequence of 49 frames is first reduced to 48 frames to simplify testing different sequence splits. Subdivisions are then tested using sub-trajectories of 8, 12, 16, or 24 frames. To ensure the training process remains within a reasonable time frame (under 24 hours), non-overlapping sequences are used, meaning each simulation is divided into non-overlapping segments of $\frac{48}{sequence\_size}$. The next section provides additional visualizations and detailed information on the performance of the models tested for each sequence size.
 
 In addition, the input needs to be prepared from the graph's perspective. The approach, similar to the original choreography model, involves using a fully connected undirected graph. This allows the model to later sample edges based on the input sequence and retain only those relevant for reconstructing the trajectory. The image below illustrates an example of the input graph from a random frame in a random sequence.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/fully_connected_graph.png", width="350">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/fully_connected_graph.png", width="300">
 </div>
 <div align='center'>
     <span>The image shows a fully connected graph used as the model's input. In this example, a random frame from a simulation is chosen, and all points are connected.</span>
@@ -48,7 +48,10 @@ This effect is evident in some experimental results shown below. Usually, when a
 
 For the following experiments, these were the original trajectories and graph considered:
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_6seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_12seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_graph.png)|
+|:-:|:-:|:-:|
+
+<!-- <div align="center" style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_graph.png" width="300">
     </div>
@@ -58,7 +61,7 @@ For the following experiments, these were the original trajectories and graph co
     <div style="margin: 0 10px;">
         <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_12seq.png" width="300">
     </div>
-</div>
+</div> -->
 <div align='center'>
     <span>On the left, there's the interaction graph for both trajectories; In the middle, the trajectory for the 6-frame sequence; and on the right, the trajectory for the 12-frame sequence.</span>
     <br><br>
