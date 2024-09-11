@@ -51,17 +51,6 @@ For the following experiments, these were the original trajectories and graph co
 |![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_6seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_12seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_graph.png)|
 |:-:|:-:|:-:|
 
-<!-- <div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_graph.png" width="300">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_6seq.png" width="300">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/original_trajectories_12seq.png" width="300">
-    </div>
-</div> -->
 <div align='center'>
     <span>On the left, there's the interaction graph for both trajectories; In the middle, the trajectory for the 6-frame sequence; and on the right, the trajectory for the 12-frame sequence.</span>
     <br><br>
@@ -81,14 +70,9 @@ For this architecture, four models were trained, and their example reconstructio
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_6seq.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_6seq.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>In the left image, the reconstruction loss curve looks healthy, showing positive signs for continuing training the model. In the right image, the reconstruction is quite interesting. While it doesn't fully capture the movement of all the particles, the model does a good job of accurately locating the particles, especially in their relative positions to each other, and capturing some of the direction and shape of the movement. Not all particles behave this way - like the red particle, which stayed still in the center - but this is still a big improvement compared to earlier results.</span>
     <br><br>
@@ -96,14 +80,9 @@ For this architecture, four models were trained, and their example reconstructio
 
 2. **Model with 6-frame sequences, but with more edge types (4 instead of binary)**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq_4edges.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_6seq_4edges.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_6seq_4edges.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_6seq_4edges.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>Once again, the left image shows healthy reconstruction loss curves, although the validation loss is a bit more unstable. As for the reconstruction itself, this was likely one of the best results. The model almost perfectly captured the movement and location of three particles (green, black, and blue) and managed to get the shape of the movement for another particle (orange), though the location wasn't as accurate. The remaining particle (red) was reasonably well-located but had no movement captured. This promising result supports the idea of using more edge types, allowing the model to better determine the strength of interactions and improve reconstructions.</span>
     <br><br>
@@ -111,14 +90,9 @@ For this architecture, four models were trained, and their example reconstructio
 
 3. **Model with 12-frame sequences**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_12seq.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_12seq.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>Although the reconstruction loss curves for this model, shown on the left, are still reasonable, the reconstruction on the right reveals more significant shortcomings compared to previous models. Not only do more particles fail to move (both the orange and red particles remain stationary in the center), but the movement of the captured particles quickly deteriorates after a certain number of frames. For instance, the green and black particles, which start off well-reconstructed, lose their trajectory completely after the first 6 predicted frames. The model shows a clear limitation in maintaining coherence over extended sequences. Additionally, the movement of the blue particle is reconstructed in the opposite direction of its actual movement. It becomes clear that, for this compact model, longer motion sequences are much more difficult to interpret.</span>
     <br><br>
@@ -126,14 +100,9 @@ For this architecture, four models were trained, and their example reconstructio
 
 4. **Model with 12-frame sequences with recurrent encoder**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq_recurrent.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_12seq_recurrent.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_small_12seq_recurrent.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_small_12seq_recurrent.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>To reduce the hallucination effects in long sequences seen with the previous model, a recurrent encoder was introduced. However, the results show reconstruction loss curves (left) very similar to the previous one, and the reconstruction quality (right) might even be worse. For example, the black particle's movement is incorrectly reconstructed from the first frame. This suggests that the compact version of the model is really not able to handle the complexity of longer sequences. Despite this, there is a possible qualitative improvement in intra-sequence coherence thanks to the recurrent encoder. The movements of the black and blue particles were reconstructed more smoothly, and the green particle showed a less severe deviation compared to earlier results.</span>
     <br><br>
@@ -141,18 +110,13 @@ For this architecture, four models were trained, and their example reconstructio
 
 ### Standard Architecture
 
-This is the originally implemented architecture, without any modifications to the one already introduced in the [README](https://github.com/Luizerko/ai_choreo/blob/master/models/ARCH_EXPERIMENT.md), only varying the length of the input sequences used.
+This is the originally implemented architecture, without any modifications to the one already introduced in the [README](https://github.com/Luizerko/ai_choreo/blob/master/models/README.md), only varying the length of the input sequences used.
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_6seq.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_standard_6seq.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_6seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_standard_6seq.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>Once again, the left image shows healthy reconstruction loss curves, indicating the potential for continuing the training process. On the right, there is an intriguing reconstruction. Despite the visual impact caused by the scale - since the green and blue particles did not have their movements predicted - the model provides a much more realistic reconstruction for the orange and red particles. In these cases, both the location and the movement shape are well predicted, with an interesting anticipation of their speeds, as if the future movement was predicted. For the black particle, the approximation of both location and movement is somewhat rough but still reasonable.</span>
     <br><br>
@@ -160,14 +124,9 @@ This is the originally implemented architecture, without any modifications to th
 
 2. **Model with 12-frame sequences**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_12seq.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_standard_12seq.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_standard_12seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_standard_12seq.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>In this case, even though the left image shows healthy reconstruction loss curves, indicating the potential for continuing the training process, the reconstruction on the right is entirely ineffective. The model trained on 6-frame sequences already showed some difficulty, possibly indicating the need for more data, but the 12-frame sequence model failed completely. Three particles (red, blue, and black) had no movement captured, and the two that did (green and orange) exhibited almost random, uncoordinated, and incoherent movement.</span>
     <br><br>
@@ -179,14 +138,9 @@ Similar to the previous architecture, this one is the same as the original, with
 
 1. **Model with 6-frame sequences**
 
-<div align="center" style="display: flex; flex-direction: row; justify-content: center;">
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_big_6seq.png" width="350">
-    </div>
-    <div style="margin: 0 10px;">
-        <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_big_6seq.png" width="350">
-    </div>
-</div>
+|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/lc_big_6seq.png)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/rec_big_6seq.png)|
+|:-:|:-:|
+
 <div align='center'>
     <span>This model continues to show healthy reconstruction loss curves (left) but struggles with reconstruction (right). Two particles (black and blue) had no movement captured, while the remaining three (green, orange, and red) displayed poor movement predictions, despite being well-localized. Overall, it seems that more data and training time might be needed for this model to produce better predictions.</span>
     <br><br>
