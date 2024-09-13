@@ -10,20 +10,23 @@ Special thanks to my supervisors, [Mariel Pettee](https://marielpettee.com/) and
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/assets/duet_choraigraphy_logo.png", width="450">
 </div>
 
-Duet ChorAIgraphy aims to implement two pipelines using Graph Neural Networks (GNNs) to study dance duets. The project focuses on two main aspects: 
+Duet ChorAIgraphy aims to implement a pipeline using Graph Neural Networks (GNNs) to study dance duets. The project focuses on **Interpretability of Movements:** a pipeline that learns about the connection between the dancers' bodies in different dance sequences.
 
-1. **Interpretability of Movements:** A pipeline that learns about the connection between the dancers' bodies in different dance sequences.
+<!-- 2. **Generation of New Sequences:** A pipeline that uses these learned connections to generate new dance sequences. -->
 
-2. **Generation of New Sequences:** A pipeline that uses these learned connections to generate new dance sequences.
-
-Below, I discuss each of these pipelines in more detail and present some results. For a more comprehensive explanation of the models, I encourage you to check the `models` directory, which contains their implementations as well as more complete documentation on both.
+The pipeline is discussed in more detail below, along with a presentation of key results. For a more comprehensive explanation of the model, refer to the `model` directory, which contains its implementations as well as complete documentation on it.
 
 ## Repository Hierarchy
 
-- The root of the repository naturally provides an overview of the project and showcases sample generations from the developed models.
+- The root of the repository naturally provides an overview of the project and showcases sample generations from the developed model.
 
-- The `evaluation_test` folder contains my application for the contributor position. In there, you can find a `README` with all the information regarding the implementations for the selection process test and also the results obtained. You can also find the notebook with the source code for everything I developed. Fortunately, I had the pleasure to expand this `README` and continue the project development.
+- The `evaluation_test` folder contains the application for the contributor position. It includes a `README` file with detailed information on the implementations for the selection process test, along with the results obtained. The folder also contains the notebook with the source code for the developed components. The `README` was later expanded as the project development continued.
 
 - The `pose_extraction` folder contains details about the pose extraction pipeline used to create the project dataset. It includes an installation process guide, the raw data used, and information on the development and execution of the idea.
 
-- The `models` folder contains the project's core, including installation instructions, pipelines designs, and running guidelines for both the interpretability of movements and the choreography generation models. It also has detailed results for a thorough evaluation on the quality of the final agents.
+- The `model` folder contains the project's core, including installation instructions, pipelines designs, and running guidelines for the interpretability of movements model. It also has detailed results for a thorough evaluation on the quality of the final agent.
+
+## Sample Generations
+
+The project has produced a wide range of results. Its creative and subjective nature offers many opportunities for exploration, even in the most unexpected outputs. However, while this subjectivity allows for different perspectives, it also creates challenges in getting a more precise evaluation of the model. Below are examples of connections (both undirected and directed) computed by the model in various scenarios. Additionally, examples of the reconstructions are provided, highlighting both their interesting aspects and areas where they fall short.
+

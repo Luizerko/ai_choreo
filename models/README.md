@@ -1,6 +1,6 @@
-# Models
+# Model
 
-After extensive data processing, attention was turned to developing the models themselves. The use of AI in dance allows for a wide range of creative possibilities. Many different tasks can be explored, but one stands out in this project: dance interpretability to help in the generation of new phrases.
+After extensive data processing, attention was turned to developing the model itself. The use of AI in dance allows for a wide range of creative possibilities. Many different tasks can be explored, but one stands out in this project: dance interpretability to help in the generation of new phrases.
 
 The task involves studying the hidden movements of a duet, extracting information that is not visually evident. For example, it might not be immediately clear that the movement of one dancer's right foot is directly connected to the movement of the other dancer's hip or left hand. The objective thus is to model and tackle a **Graph Structure Learning** problem, uncovering the connections (or different types of connections) between the dancers' joints. More specific technical details are described in a dedicated section below.
 
@@ -22,9 +22,9 @@ The next step in the project involves loading the dance data for AI modeling. Fi
     <br><br>
 </div>
 
-The idea behind mapping the skeletons of both dancers in this way is to ensure the model focuses on the connections between them, rather than on the connections within each individual dancer. It's natural that much of a dancer's joint movement could be more easily predicted by inspecting their other joints. However, the goal here is to focus on the influences between the dancers, identifying which joints of one dancer influence the other and vice versa. It is also worth noting that, to simplify the initial modeling, this graph is undirected. This approach can be adjusted in the future to evaluate the direction of the influences between each joint of both dancers.
+The purpose of mapping both dancers' skeletons in this way is to ensure the model focuses on the connections between them, rather than the connections within each individual dancer. While a dancer's joint movements can often be predicted by analyzing their other joints, the aim here is to highlight the interactions between the dancers, identifying which joints of one dancer influence the other and vice versa. Additionally, both directions of the edges are considered, allowing the model to assess the direction of influence between each joint of the two dancers.
 
-These connections are what the graph structure learning model will classify, initially as existing or non-existing edges for simplicity, but later categorically by the degree of influence in the movement. The data is then prepared for model training by creating batches with PyTorch tensors. The tensors are structured with dimensions representing the total number of sequences, the sequence length, the number of joints from both dancers, and 3D coordinates + 3D velocity estimates. Finally, a training-validation split is created to allow for proper model hyperparameter tuning.
+These connections are what the graph structure learning model will classify categorically by the degree of influence in the movement, ranging from non-existing to core connections. The data is then prepared for model training by creating batches with PyTorch tensors. The tensors are structured with dimensions representing the total number of sequences, the sequence length, the number of joints from both dancers, and 3D coordinates + 3D velocity estimates. Finally, a training-validation split is created to allow for proper model hyperparameter tuning.
 
 To include data augmentation and improve model generalization, the training pipeline incorporates a data processing step that involves rotating batches of data. Each batch is rotated along the Z-axis by a randomly selected angle while maintaining the original X and Y-axis orientations for physical consistency. This approach helps prevent the model from overfitting to the dancers' absolute positions.
 
@@ -50,9 +50,9 @@ This project's implementation, even though very similar to the NRI MLP-Encoder M
 
 - **Graph Convolutional Network (GCN):** Some MLP layers are replaced with GCN layers to leverage the graph structure, improving the model's ability to capture relationships between joints. This change focuses on a subset of edges connecting both dancers rather than studying all particle relationships as in the original implementation. Additionally, GCNs provide local feature aggregation and parameter sharing, important inductive biases for this context, resulting in enhanced generalization in a scenario with dynamic (and unknown) graph structures.
 
-- **GCN LSTM Cells:** To utilize the recurrent structure crucial for sequence processing while maintaining graph information and GNN architecture, the classic LSTM cell has been reimplemented with GCN nodes. Currently only the decoder incorporates the recurrent component, which generates a final sequence embedding that the model uses to reconstruct the next frame.
+- **Graph Recurrent Neural Network (GRNN) Decoder:** To make better use of sequential information and achieve a more suitable final embedding for predicting (or reconstructing) the next frame, beyond just spatial information from the graphs, it is essential to use a recurrent network. The decoder is therefore implemented with LSTM nodes in the original sequence, while also using the graph structure sampled from the latent space generated by the encoder.
 
-- **Recurrent Decoder:** 
+- **Custom GCN-LSTM Cells:** To utilize the recurrent structure crucial for sequence processing while maintaining graph information and GNN architecture, the classic LSTM cell has been reimplemented with GCN nodes. Currently only the decoder incorporates the recurrent component, which generates a final sequence embedding that the model uses to reconstruct the next frame.
 
 By incorporating these modifications, the model maintains the core principles of the original NRI model while theoretically enhancing its ability to generalize and adapt to the dynamic nature of dance performances.
 
@@ -66,9 +66,9 @@ By incorporating these modifications, the model maintains the core principles of
 
 - Next, the edge representations are converted back into nodes, and another GCN layer is applied.
 
-- The nodes are then transformed back into edges, followed by another MLP layer with a skip connection from the dropout layer.
+- The nodes are then transformed back into edges, followed by another MLP layer with a skip connection from the previous dropout layer.
 
-- Finally, an MLP layer produces logits, which currently represent two features indicating edge types (existing or non-existing).
+- Finally, an MLP layer generates logits that represent edge types, ranging from non-existent edges to those most critical for the movement being analyzed.
 
 **Decoder:**
 
@@ -78,4 +78,4 @@ By incorporating these modifications, the model maintains the core principles of
 
 - This is followed by an MLP layer, batch normalization, and dropout.
 
-- Finally, the edge representations are converted back into nodes, and a GCN layer is applied to reconstruct a frame.
+- Finally, the edge representations are converted back into nodes, and a GCN layer is applied to predict (or reconstruct) the next frame.
