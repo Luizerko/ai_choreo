@@ -149,7 +149,7 @@ It's also evident that the number of edges sampled with a confidence above 80% i
 Now regarding the edges specifically, a few clear patterns emerge. First, among the core edges, most have the same confidence, with normally only one or two edges standing out less. This suggests a low hierarchy among the sampled edges, meaning that once an edge is part of the core group, it has a significant role in information propagation.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/low_hierarchy_edges.png", width="500">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/low_hierarchy_edges.gif", width="500">
 </div>
 <div align="center">
     <span>Example of the sampled edge distribution. The black edges represent connections between the dancers, with darker edges indicating higher confidence in their importance for reconstruction. In this typical case, for 6 particles sampled, 3 edges were selected, two with slightly higher importance, though all show a high confidence level (above 80%).</span>
