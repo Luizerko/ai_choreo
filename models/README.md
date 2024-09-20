@@ -1,6 +1,6 @@
-# Model
+# Models
 
-After extensive data processing, attention was turned to developing the model itself. The use of AI in dance allows for a wide range of creative possibilities. Many different tasks can be explored, but one stands out in this project: dance interpretability to help in the generation of new phrases.
+After extensive data processing, attention was turned to developing a model. The use of AI in dance allows for a wide range of creative possibilities. Many different tasks can be explored, but one stands out in this project: dance interpretability to help in the generation of new phrases.
 
 The task involves studying the hidden movements of a duet, extracting information that is not visually evident. For example, it might not be immediately clear that the movement of one dancer's right foot is directly connected to the movement of the other dancer's hip or left hand. The objective thus is to model and tackle a **Graph Structure Learning** problem, uncovering the connections (or different types of connections) between the dancers' joints. More specific technical details are described in a dedicated section below.
 
@@ -69,7 +69,7 @@ This project's implementation, even though very similar to the NRI MLP-Encoder M
 By incorporating these modifications, the model maintains the core principles of the original NRI model while theoretically enhancing its ability to generalize and adapt to the dynamic nature of dance performances.
 
 <div align="center">
-    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="650">
+    <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="750">
 </div>
 <div align="center">
     <span>Schematic of the final model architecture, including the GCN nodes and the GRNN adapatation, inspired by the one foun in the <a href='https://arxiv.org/abs/1802.04687'>original NRI paper</a>.</span>
