@@ -28,5 +28,5 @@ The pipeline is discussed in more detail below, along with a presentation of key
 
 ## Sample Generations
 
-The project has produced a wide range of results. Its creative and subjective nature offers many opportunities for exploration, even in the most unexpected outputs. However, while this subjectivity allows for different perspectives, it also creates challenges in getting a more precise evaluation of the model. Below are examples of connections (both undirected and directed) computed by the model in various scenarios. Additionally, examples of the reconstructions are provided, highlighting both their interesting aspects and areas where they fall short.
+The project has produced a wide range of results. Its creative and subjective nature offers many opportunities for exploration, even in the most unexpected outputs. However, while this subjectivity allows for different perspectives, it also creates challenges in getting a more precise evaluation of the model. Below are examples of connections (both undirected and directed) computed by the model in various scenarios. For more examples and a deeper study about what the model is doing, please check the [documentation under `model`](https://github.com/Luizerko/ai_choreo/blob/master/models/README.md).
 
