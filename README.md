@@ -14,7 +14,7 @@ Duet ChorAIgraphy aims to implement a pipeline using Graph Neural Networks (GNNs
 
 <!-- 2. **Generation of New Sequences:** A pipeline that uses these learned connections to generate new dance sequences. -->
 
-The pipeline is discussed in more detail below, along with a presentation of key results. For a more comprehensive explanation of the model, refer to the `model` directory, which contains its implementations as well as complete documentation on it.
+The pipeline is discussed in more detail below, along with a presentation of key results. For a more comprehensive explanation of the model, refer to the `models` directory, which contains its implementations as well as complete documentation on it.
 
 ## Repository Hierarchy
 
@@ -24,11 +24,11 @@ The pipeline is discussed in more detail below, along with a presentation of key
 
 - The `pose_extraction` folder contains details about the pose extraction pipeline used to create the project dataset. It includes an installation process guide, the raw data used, and information on the development and execution of the idea.
 
-- The `model` folder contains the project's core, including installation instructions, pipelines designs, and running guidelines for the interpretability of movements model. It also has detailed results for a thorough evaluation on the quality of the final agent.
+- The `models` folder contains the project's core, including installation instructions, pipelines designs, and running guidelines for the interpretability of movements model. It also has detailed results for a thorough evaluation on the quality of the final agent.
 
 ## Sample Generations
 
-The project has produced a wide range of results. Its creative and subjective nature offers many opportunities for exploration, even in the most unexpected outputs. However, while this subjectivity allows for different perspectives, it also creates challenges in getting a more precise evaluation of the model. Below are examples of connections (both undirected and directed) computed by the model in various scenarios. For a deeper study about what the model is doing, please check the [documentation under `model`](https://github.com/Luizerko/ai_choreo/blob/master/models/README.md).
+The project has produced a wide range of results. Its creative and subjective nature offers many opportunities for exploration, even in the most unexpected outputs. However, while this subjectivity allows for different perspectives, it also creates challenges in getting a more precise evaluation of the model. Below are examples of connections (both undirected and directed) computed by the model in various scenarios. For a deeper study about what the model is doing, please check the [documentation under `models`](https://github.com/Luizerko/ai_choreo/blob/master/models/README.md).
 
 <div align="center">
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/low_hierarchy_edges.gif", width="500">
