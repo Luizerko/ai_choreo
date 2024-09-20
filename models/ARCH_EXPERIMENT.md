@@ -52,7 +52,7 @@ For the following experiments, these were the original trajectories and graph co
 |:-:|:-:|:-:|
 
 <div align='center'>
-    <span>On the left, there's the interaction graph for both trajectories; In the middle, the trajectory for the 6-frame sequence; and on the right, the trajectory for the 12-frame sequence.</span>
+    <span>On the left, the trajectory for the 6-frame sequence; in the middle, the trajectory for the 12-frame sequence; and on the right, the interaction graph for both trajectories.</span>
     <br><br>
 </div>
 

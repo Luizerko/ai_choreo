@@ -44,7 +44,7 @@ Due to the high complexity of the problem, both in the number of moving particle
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/sampled_dancers.png", width="550">
 </div>
 <div align='center'>
-    <span>Plot showing an example of sampled joints, three for each dancer in this case. On the left, only the joints are displayed, while on the right, the joints are fully connected between the dancers (but not within a single dancer). Note that if there was already an edge connecting two joints within a dancer (from the skeleton), this edge is preserved as well.</span>
+    <span>Plot showing an example of sampled joints, five for each dancer in this case. On the left, only the joints are displayed, while on the right, the joints are fully connected between the dancers (but not within a single dancer). Note that if there was already an edge connecting two joints within a dancer (from the skeleton), this edge is preserved as well.</span>
     <br><br>
 </div>
 
