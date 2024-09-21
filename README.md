@@ -2,7 +2,9 @@
 
 This repository is dedicated to the development of the project [AI-Generated Choreography - from Solos to Duets](https://humanai.foundation/gsoc/2024/proposal_ChoreoAI1.html). Here, you will find all the documentation and code for implementing my pipelines.
 
-Special thanks to my supervisors, [Mariel Pettee](https://marielpettee.com/) and [Ilya Vidrin](https://www.ilyavidrin.com/), for all their guidance, and to my work partner, Zixuan Wang, for developing [her pipeline](https://github.com/wang-zixuan/AI-Choreo-Duets/tree/main) alongside mine.
+Special thanks to my supervisors, [Mariel Pettee](https://marielpettee.com/) and [Ilya Vidrin](https://www.ilyavidrin.com/), for all their guidance, and to my work partner, Zixuan Wang, for developing [her pipeline](https://github.com/humanai-foundation/ChoreoAI/tree/main/ChoreoAI_Zixuan_Wang) alongside mine.
+
+If you don't want to dive into the code right away but rather want to have an overview of the entire project, check my [blog posts on Medium](https://medium.com/@luisvz).
 
 ## Duet ChorAIgraphy: Using GNNs to Study Duets
 
@@ -41,7 +43,7 @@ The project has produced a wide range of results. Its creative and subjective na
 |![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/multi_edge_part_1.gif)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/multi_edge_part_2.gif)|
 |:-:|:-:|
 <div align="center">
-    <span>Examples of multiple edges connected to the same particle. On the left, an undirected example shows simpler movement for a sampling of 6 particles, while on the right, a directed example features more complex movement for a sampling of 10 particles. It is worth noting that, for the animation on the right, the model recognizes how one dancer's feet motion influence various parts of the other dancer's body, which aligns with the movement being performed, where the dynamic spin of the blue dancer guides the red dancer's response.</a>.</span>
+    <span>Examples of multiple edges connected to the same particle. On the left, an undirected example shows simpler movement for a sampling of 6 particles, while on the right, a directed example features more complex movement for a sampling of 10 particles. It is worth noting that, for the animation on the right, the model recognizes how one dancer's feet motion influence various parts of the other dancer's body, which aligns with the movement being performed, where the dynamic spin of the blue dancer guides the red dancer's response.</span>
     <br><br>
 </div>
 

@@ -72,7 +72,7 @@ By incorporating these modifications, the model maintains the core principles of
     <img src="https://github.com/Luizerko/ai_choreo/blob/master/models/assets/final_arch.png", width="750">
 </div>
 <div align="center">
-    <span>Schematic of the final model architecture, including the GCN nodes and the GRNN adapatation, inspired by the one foun in the <a href='https://arxiv.org/abs/1802.04687'>original NRI paper</a>.</span>
+    <span>Schematic of the final model architecture, including the GCN nodes and the GRNN adapatation, inspired by the one found in the <a href='https://arxiv.org/abs/1802.04687'>original NRI paper</a>.</span>
     <br><br>
 </div>
 
@@ -161,7 +161,7 @@ Additionally, it's common to find a particle connected by multiple edges. This l
 |![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/multi_edge_part_1.gif)|![](https://github.com/Luizerko/ai_choreo/blob/master/models/assets/multi_edge_part_2.gif)|
 |:-:|:-:|
 <div align="center">
-    <span>Examples of multiple edges connected to the same particle. On the left, an undirected example shows simpler movement for a sampling of 6 particles, while on the right, a directed example features more complex movement for a sampling of 10 particles. It is worth noting that, for the animation on the right, the model recognizes how one dancer's feet motion influence various parts of the other dancer's body, which aligns with the movement being performed, where the dynamic spin of the blue dancer guides the red dancer's response.</a>.</span>
+    <span>Examples of multiple edges connected to the same particle. On the left, an undirected example shows simpler movement for a sampling of 6 particles, while on the right, a directed example features more complex movement for a sampling of 10 particles. It is worth noting that, for the animation on the right, the model recognizes how one dancer's feet motion influence various parts of the other dancer's body, which aligns with the movement being performed, where the dynamic spin of the blue dancer guides the red dancer's response.</span>
     <br><br>
 </div>
 
@@ -174,7 +174,7 @@ Another important pattern, though more subjective, is the connection between par
     <br><br>
 </div>
 
-## Future
+## Future of the Project
 
 Despite the interesting results, there is clearly room for improvement. The main issues are the reconstructions, which remain unreliable and overly sensitive to the sampled edges, and the fact that only sampled joints are analyzed, not the dancers as a whole. However, there are many other challenges still to be addressed. Considering all of this, several next steps are suggested for further development of this project:
 

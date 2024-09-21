@@ -158,7 +158,7 @@ Similar to the previous architecture, this one is the same as the original, with
 
 ### Conclusion
 
-In the end, it becomes clearer that the implemented architecture shows potential for addressing such a task effectively. In a simplified scenario with more abundant data, it was observed that after just a few iterations (between 10 and 20 epochs, depending on the model's training time), the loss curves displayed typical and more controlled behavior. Furthermore, these curves mostly indicated the model's potential for further improvement with more iterations, and no signs of overfitting yet.
+In the end, it becomes clearer that the implemented architecture shows potential for addressing such a task effectively. In a simplified scenario with more abundant data, it was observed that after just a few iterations (between 10 and 20 epochs, depending on the model's training time), the reconstruction loss curves displayed typical and more controlled behavior. Furthermore, these curves mostly indicated the model's potential for further improvement with more iterations, and no signs of overfitting yet.
 
 The rapid convergence of the KL Divergence is attributed to a slightly high beta coefficient during the autoencoder training process. Since beta was adjusted based on the number of epochs, when the model was trained for fewer epochs, beta increased more quickly. Thus this kind of behavior in the KL loss was expected. Although not ideal, the quick convergence did not lead to one of its common side effects: the failure to optimize reconstruction error, which allowed for smooth training overall.
 
