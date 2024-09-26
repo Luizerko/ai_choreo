@@ -14,3 +14,4 @@ models/__pycache__/
 models/NRI_particles_test_*
 models/graphs
 models/best_weights/nri_particles*
+models/data/sampling_data.ipynb
